@@ -212,9 +212,8 @@ let rules = {
         production: "seq"
     },
     "BaseType": {  # qualident
-        rules: [
-        ],
-        production: "foo"
+        rules: ["qualident"],
+        production: "seq"
     },
     "FieldListSequence": {  # FieldList {";" FieldList}
         rules: [
