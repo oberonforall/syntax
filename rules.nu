@@ -23,9 +23,7 @@ let rules = {
             {
                 rules: [
                     {
-                        rules: [
-                            "letter", "digit"
-                        ],
+                        rules: ["letter", "digit"],
                         production: "or"
                     }
                 ],
