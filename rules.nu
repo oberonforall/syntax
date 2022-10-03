@@ -609,9 +609,8 @@ let rules = {
         production: "seq"
     },
     "RepeatStatement": {  # REPEAT StatementSequence UNTIL expression
-        rules: [
-        ],
-        production: "foo"
+        rules: ["REPEAT", "StatementSequence", "UNTIL", "expression"],
+        production: "seq"
     },
     "ForStatement": {  # FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END
         rules: [
