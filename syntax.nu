@@ -552,7 +552,7 @@ let syntax = {
                     rules: [
                         {
                             rules: ["ELSIF", "expression", "THEN", "StatementSequence"],
-                            production: "any"
+                            production: "seq"
                         },
                     ],
                     production: "any"
@@ -561,7 +561,7 @@ let syntax = {
                     rules: [
                         {
                             rules: ["ELSE", "StatementSequence"],
-                            production: "any"
+                            production: "seq"
                         },
                     ],
                     production: "one"
@@ -708,7 +708,7 @@ let syntax = {
             rules: [
                 "DeclarationSequence",
                 {
-                    rules:
+                    rules: [
                         {
                             rules: ["BEGIN", "StatementSequence"],
                             production: "seq"
@@ -717,7 +717,7 @@ let syntax = {
                     production: "one"
                 },
                 {
-                    rules:
+                    rules: [
                         {
                             rules: ["RETURN", "expression"],
                             production: "seq"
