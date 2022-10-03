@@ -476,8 +476,13 @@ let rules = {
     },
     "ProcedureCall": {  # designator [ActualParameters]
         rules: [
+            "designator",
+            {
+                rules: ["ActualParameters"],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "StatementSequence": {  # statement {";" statement}
         rules: [
