@@ -501,8 +501,31 @@ let rules = {
     },
     "IfStatement": {  # IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END
         rules: [
+            "IF",
+            "expression",
+            "THEN",
+            "StatementSequence",
+            {
+                rules: [
+                    {
+                        rules: ["ELSIF", "expression", "THEN", "StatementSequence"],
+                        production: "any"
+                    },
+                ],
+                production: "any"
+            },
+            {
+                rules: [
+                    {
+                        rules: ["ELSE", "StatementSequence"],
+                        production: "any"
+                    },
+                ],
+                production: "one"
+            },
+            "END"
         ],
-        production: "foo"
+        production: "seq"
     },
     "CaseStatement": {  # CASE expression OF case {"|" case} END
     },
