@@ -166,9 +166,8 @@ let rules = {
         production: "seq"
     },
     "type": {  # qualident | ArrayType | RecordType | PointerType | ProcedureType
-        rules: [
-        ],
-        production: "foo"
+        rules: ["qualident", "ArrayType", "RecordType", "PointerType", "ProcedureType"],
+        production: "or"
     },
     "ArrayType": {  # ARRAY length {"," length} OF type
         rules: [
