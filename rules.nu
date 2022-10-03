@@ -1,256 +1,125 @@
 let rules = {
-    "A": { f: 1, t: true},
-    "B": { f: 1, t: true},
-    "C": { f: 1, t: true},
-    "D": { f: 1, t: true},
-    "E": { f: 1, t: true},
-    "F": { f: 1, t: true},
-    "G": { f: 1, t: true},
-    "H": { f: 1, t: true},
-    "I": { f: 1, t: true},
-    "J": { f: 1, t: true},
-    "K": { f: 1, t: true},
-    "L": { f: 1, t: true},
-    "M": { f: 1, t: true},
-    "N": { f: 1, t: true},
-    "O": { f: 1, t: true},
-    "P": { f: 1, t: true},
-    "Q": { f: 1, t: true},
-    "R": { f: 1, t: true},
-    "S": { f: 1, t: true},
-    "T": { f: 1, t: true},
-    "U": { f: 1, t: true},
-    "V": { f: 1, t: true},
-    "W": { f: 1, t: true},
-    "X": { f: 1, t: true},
-    "Y": { f: 1, t: true},
-    "Z": { f: 1, t: true},
-    "a": { f: 1, t: true},
-    "b": { f: 1, t: true},
-    "c": { f: 1, t: true},
-    "d": { f: 1, t: true},
-    "e": { f: 1, t: true},
-    "f": { f: 1, t: true},
-    "g": { f: 1, t: true},
-    "h": { f: 1, t: true},
-    "i": { f: 1, t: true},
-    "j": { f: 1, t: true},
-    "k": { f: 1, t: true},
-    "l": { f: 1, t: true},
-    "m": { f: 1, t: true},
-    "n": { f: 1, t: true},
-    "o": { f: 1, t: true},
-    "p": { f: 1, t: true},
-    "q": { f: 1, t: true},
-    "r": { f: 1, t: true},
-    "s": { f: 1, t: true},
-    "t": { f: 1, t: true},
-    "u": { f: 1, t: true},
-    "v": { f: 1, t: true},
-    "w": { f: 1, t: true},
-    "x": { f: 1, t: true},
-    "y": { f: 1, t: true},
-    "z": { f: 1, t: true},
-
-    "0": { f: 1, t: true},
-    "1": { f: 1, t: true},
-    "2": { f: 1, t: true},
-    "3": { f: 1, t: true},
-    "4": { f: 1, t: true},
-    "5": { f: 1, t: true},
-    "6": { f: 1, t: true},
-    "7": { f: 1, t: true},
-    "8": { f: 1, t: true},
-    "9": { f: 1, t: true},
-
-    "letter": {
-        s: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-        p: "or",
-        f: 1,
-        t: false,
+    "letter": {  # "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
     },
-    "digit": {
-        s: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-        p: "or",
-        f: 1,
-        t: false,
+    "digit": {  # "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
     },
-    "hexDigit": {
-        s: ["digit", "A", "B", "C", "D", "E", "F"],
-        p: "or",
-        f: 1,
-        t: false,
+    "hexDigit": {  # digit | "A" | "B" | "C" | "D" | "E" | "F"
     },
-
-    "qualident": {
-        #s: [ident "."] ident,
+    "ident": {  # letter {letter | digit}
     },
-    "identdef": {
-        #s: ident ["*"],
+    "qualident": {  # [ident "."] ident
     },
-    "integer": {
-        #s: digit {digit} | digit {hexDigit} "H",
+    "identdef": {  # ident ["*"]
     },
-    "real": {
-        #s: digit {digit} "." {digit} [ScaleFactor],
+    "integer": {  # digit {digit} | digit {hexDigit} "H"
     },
-    "ScaleFactor": {
-        #s: "E" ["+" | "-"] digit {digit},
+    "real": {  # digit {digit} "." {digit} [ScaleFactor]
     },
-    "number": {
-        #s: integer | real,
+    "ScaleFactor": {  # "E" ["+" | "-"] digit {digit}
     },
-    "string": {
-        #s: """ {character} """ | digit {hexDigit} "X",
+    "number": {  # integer | real
     },
-    "ConstDeclaration": {
-        #s: identdef "=" ConstExpression,
+    "string": {  # """ {character} """ | digit {hexDigit} "X"
     },
-    "ConstExpression": {
-        #s: expression,
+    "ConstDeclaration": {  # identdef "=" ConstExpression
     },
-    "TypeDeclaration": {
-        #s: identdef "=" type,
+    "ConstExpression": {  # expression
     },
-    "type": {
-        #s: qualident | ArrayType | RecordType | PointerType | ProcedureType,
+    "TypeDeclaration": {  # identdef "=" type
     },
-    "ArrayType": {
-        #s: ARRAY length {"," length} OF type,
+    "type": {  # qualident | ArrayType | RecordType | PointerType | ProcedureType
     },
-    "length": {
-        #s: ConstExpression,
+    "ArrayType": {  # ARRAY length {"," length} OF type
     },
-    "RecordType": {
-        #s: RECORD ["(" BaseType ")"] [FieldListSequence] END,
+    "length": {  # ConstExpression
     },
-    "BaseType": {
-        #s: qualident,
+    "RecordType": {  # RECORD ["(" BaseType ")"] [FieldListSequence] END
     },
-    "FieldListSequence": {
-        #s: FieldList {";" FieldList},
+    "BaseType": {  # qualident
     },
-    "FieldList": {
-        #s: IdentList ":" type,
+    "FieldListSequence": {  # FieldList {";" FieldList}
     },
-    "IdentList": {
-        #s: identdef {"," identdef},
+    "FieldList": {  # IdentList ":" type
     },
-    "PointerType": {
-        #s: POINTER TO type,
+    "IdentList": {  # identdef {"," identdef}
     },
-    "ProcedureType": {
-        #s: PROCEDURE [FormalParameters],
+    "PointerType": {  # POINTER TO type
     },
-    "VariableDeclaration": {
-        #s: IdentList ":" type,
+    "ProcedureType": {  # PROCEDURE [FormalParameters]
     },
-    "expression": {
-        #s: SimpleExpression [relation SimpleExpression],
+    "VariableDeclaration": {  # IdentList ":" type
     },
-    "relation": {
-        #s: "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS,
+    "expression": {  # SimpleExpression [relation SimpleExpression]
     },
-    "SimpleExpression": {
-        #s: ["+" | "-"] term {AddOperator term},
+    "relation": {  # "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS
     },
-    "AddOperator": {
-        #s: "+" | "-" | OR,
+    "SimpleExpression": {  # ["+" | "-"] term {AddOperator term}
     },
-    "term": {
-        #s: factor {MulOperator factor},
+    "AddOperator": {  # "+" | "-" | OR
     },
-    "MulOperator": {
-        #s: "*" | "/" | DIV | MOD | "&",
+    "term": {  # factor {MulOperator factor}
     },
-    "factor": {
-        #s: number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor,
+    "MulOperator": {  # "*" | "/" | DIV | MOD | "&"
     },
-    "designator": {
-        #s: qualident {selector},
+    "factor": {  # number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor
     },
-    "selector": {
-        #s: "." ident | "[" ExpList "]" | "^" | "(" qualident ")",
+    "designator": {  # qualident {selector}
     },
-    "set": {
-        #s: "{" [element {"," element}] "}",
+    "selector": {  # "." ident | "[" ExpList "]" | "^" | "(" qualident ")"
     },
-    "element": {
-        #s: expression [".." expression],
+    "set": {  # "{" [element {"," element}] "}"
     },
-    "ExpList": {
-        #s: expression {"," expression},
+    "element": {  # expression [".." expression]
     },
-    "ActualParameters": {
-        #s: "(" [ExpList] ")",
+    "ExpList": {  # expression {"," expression}
     },
-    "statement": {
-        #s: [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement],
+    "ActualParameters": {  # "(" [ExpList] ")"
     },
-    "assignment": {
-        #s: designator ":=" expression,
+    "statement": {  # [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement]
     },
-    "ProcedureCall": {
-        #s: designator [ActualParameters],
+    "assignment": {  # designator ":=" expression
     },
-    "StatementSequence": {
-        #s: statement {";" statement},
+    "ProcedureCall": {  # designator [ActualParameters]
     },
-    "IfStatement": {
-        #s: IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END,
+    "StatementSequence": {  # statement {";" statement}
     },
-    "CaseStatement": {
-        #s: CASE expression OF case {"|" case} END,
+    "IfStatement": {  # IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END
     },
-    "case": {
-        #s: [CaseLabelList ":" StatementSequence],
+    "CaseStatement": {  # CASE expression OF case {"|" case} END
     },
-    "CaseLabelList": {
-        #s: LabelRange {"," LabelRange},
+    "case": {  # [CaseLabelList ":" StatementSequence]
     },
-    "LabelRange": {
-        #s: label [".." label],
+    "CaseLabelList": {  # LabelRange {"," LabelRange}
     },
-    "label": {
-        #s: integer | string | qualident,
+    "LabelRange": {  # label [".." label]
     },
-    "WhileStatement": {
-        #s: WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END,
+    "label": {  # integer | string | qualident
     },
-    "RepeatStatement": {
-        #s: REPEAT StatementSequence UNTIL expression,
+    "WhileStatement": {  # WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END
     },
-    "ForStatement": {
-        #s: FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END,
+    "RepeatStatement": {  # REPEAT StatementSequence UNTIL expression
     },
-    "ProcedureDeclaration": {
-        #s: ProcedureHeading ";" ProcedureBody ident,
+    "ForStatement": {  # FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END
     },
-    "ProcedureHeading": {
-        #s: PROCEDURE identdef [FormalParameters],
+    "ProcedureDeclaration": {  # ProcedureHeading ";" ProcedureBody ident
     },
-    "ProcedureBody": {
-        #s: DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END,
+    "ProcedureHeading": {  # PROCEDURE identdef [FormalParameters]
     },
-    "DeclarationSequence": {
-        #s: [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"},
+    "ProcedureBody": {  # DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END
     },
-    "FormalParameters": {
-        #s: "(" [FPSection {";" FPSection}] ")" [":" qualident],
+    "DeclarationSequence": {  # [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"}
     },
-    "FPSection": {
-        #s: [VAR] ident {"," ident} ":" FormalType,
+    "FormalParameters": {  # "(" [FPSection {";" FPSection}] ")" [":" qualident]
     },
-    "FormalType": {
-        #s: {ARRAY OF} qualident,
+    "FPSection": {  # [VAR] ident {"," ident} ":" FormalType
     },
-    "module": {
-        #s: MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident ".",
+    "FormalType": {  # {ARRAY OF} qualident
     },
-    "ImportList": {
-        #s: IMPORT import {"," import} ";",
+    "module": {  # MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident "."
     },
-    "import": {
-        #s: ident [":=" ident],
+    "ImportList": {  # IMPORT import {"," import} ";"
     },
+    "import": {  # ident [":=" ident]
+        foo: "foo"
+   },
 }
