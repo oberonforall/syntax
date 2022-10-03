@@ -364,8 +364,13 @@ let rules = {
     },
     "designator": {  # qualident {selector}
         rules: [
+            "qualident",
+            {
+                rules: ["selector"],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "selector": {  # "." ident | "[" ExpList "]" | "^" | "(" qualident ")"
         rules: [
