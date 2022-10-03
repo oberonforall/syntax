@@ -429,8 +429,18 @@ let rules = {
     },
     "ExpList": {  # expression {"," expression}
         rules: [
+            "expression",
+            {
+                rules: [
+                    {
+                        rules: [",", "expression"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "ActualParameters": {  # "(" [ExpList] ")"
         rules: [
