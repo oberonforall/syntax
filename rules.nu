@@ -803,8 +803,18 @@ let rules = {
     },
     "FormalType": {  # {ARRAY OF} qualident
         rules: [
+            {
+                rules: [
+                    {
+                        rules: ["ARRAY", "OF"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            },
+            "qualident"
         ],
-        production: "foo"
+        production: "seq"
     },
     "module": {  # MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident "."
         rules: [
