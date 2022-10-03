@@ -154,9 +154,8 @@ let rules = {
         production: "or"
     },
     "ConstDeclaration": {  # identdef "=" ConstExpression
-        rules: [
-        ],
-        production: "foo"
+        rules: ["identdef", "=", "ConstExpression"],
+        production: "seq"
     },
     "ConstExpression": {  # expression
         rules: [
