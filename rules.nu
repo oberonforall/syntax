@@ -374,8 +374,21 @@ let rules = {
     },
     "selector": {  # "." ident | "[" ExpList "]" | "^" | "(" qualident ")"
         rules: [
+            {
+                rules: [".", "ident"],
+                production: "seq"
+            },
+            {
+                rules: ["[", "ExpList", "]"],
+                production: "seq"
+            },
+            "^",
+            {
+                rules: ["(", "qualident", ")"],
+                production: "seq"
+            }
         ],
-        production: "foo"
+        production: "or"
     },
     "set": {  # "{" [element {"," element}] "}"
         rules: [
