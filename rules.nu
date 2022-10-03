@@ -392,8 +392,25 @@ let rules = {
     },
     "set": {  # "{" [element {"," element}] "}"
         rules: [
+            "{",
+            {
+                rules: [
+                    "element",
+                    {
+                        rules: [
+                            {
+                                rules: [",", "element"],
+                                production: "seq"
+                            }
+                        ],
+                        production: "any"
+                    }
+                ],
+                production: "one"
+            },
+            "}"
         ],
-        production: "foo"
+        production: "seq"
     },
     "element": {  # expression [".." expression]
         rules: [
