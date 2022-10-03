@@ -311,9 +311,8 @@ let rules = {
         production: "seq"
     },
     "AddOperator": {  # "+" | "-" | OR
-        rules: [
-        ],
-        production: "foo"
+        rules: ["+", "-", "OR"],
+        production: "or"
     },
     "term": {  # factor {MulOperator factor}
         rules: [
