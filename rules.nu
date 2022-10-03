@@ -250,9 +250,8 @@ let rules = {
         production: "seq"
     },
     "PointerType": {  # POINTER TO type
-        rules: [
-        ],
-        production: "foo"
+        rules: ["POINTER", "TO", "type"],
+        production: "seq"
     },
     "ProcedureType": {  # PROCEDURE [FormalParameters]
         rules: [
