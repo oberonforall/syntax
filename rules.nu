@@ -614,8 +614,26 @@ let rules = {
     },
     "ForStatement": {  # FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END
         rules: [
+            "FOR",
+            "ident",
+            ":=",
+            "expression",
+            "TO",
+            "expression",
+            {
+                rules: [
+                    {
+                        rules: ["BY", "ConstExpression"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            "DO",
+            "StatementSequence",
+            "END"
         ],
-        production: "foo"
+        production: "seq"
     },
     "ProcedureDeclaration": {  # ProcedureHeading ";" ProcedureBody ident
         rules: [
