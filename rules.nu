@@ -158,9 +158,8 @@ let rules = {
         production: "seq"
     },
     "ConstExpression": {  # expression
-        rules: [
-        ],
-        production: "foo"
+        rules: ["expression"],
+        production: "seq"
     },
     "TypeDeclaration": {  # identdef "=" type
         rules: [
