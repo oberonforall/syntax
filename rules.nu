@@ -85,8 +85,22 @@ let rules = {
     },
     "real": {  # digit {digit} "." {digit} [ScaleFactor]
         rules: [
+            "digit",
+            {
+                rules: ["digit"],
+                production: "any"
+            },
+            ".",
+            {
+                rules: ["digit"],
+                production: "any"
+            },
+            {
+                rules: ["ScaleFactor"],
+                production: "one"
+            },
         ],
-        production: "foo"
+        production: "seq"
     },
     "ScaleFactor": {  # "E" ["+" | "-"] digit {digit}
         rules: [
