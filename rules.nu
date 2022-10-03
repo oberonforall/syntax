@@ -641,8 +641,14 @@ let rules = {
     },
     "ProcedureHeading": {  # PROCEDURE identdef [FormalParameters]
         rules: [
+            "PROCEDURE",
+            "identdef",
+            {
+                rules: ["FormalParameters"],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "ProcedureBody": {  # DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END
         rules: [
