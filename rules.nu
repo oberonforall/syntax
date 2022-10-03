@@ -572,8 +572,18 @@ let rules = {
     },
     "LabelRange": {  # label [".." label]
         rules: [
+            "label",
+            {
+                rules: [
+                    {
+                        rules: ["..", "label"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "label": {  # integer | string | qualident
         rules: [
