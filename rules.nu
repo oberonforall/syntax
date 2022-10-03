@@ -171,8 +171,21 @@ let rules = {
     },
     "ArrayType": {  # ARRAY length {"," length} OF type
         rules: [
+            "ARRAY",
+            "length",
+            {
+                rules: [
+                    {
+                        rules: [",", "length"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            },
+            "OF",
+            "type"
         ],
-        production: "foo"
+        production: "seq"
     },
     "length": {  # ConstExpression
         rules: [
