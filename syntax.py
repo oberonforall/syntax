@@ -4,16 +4,24 @@ import argparse
 import json
 
 
-def generate_rule(name: str, *, syntax: Dict[str, Any]) -> str:
+def is_keyword(word: str) -> bool:
+    return len(word) >= 2 and word.isupper()
+
+
+def generate_rule(name: str, *, syntax: Dict[str, Any], tokens: List[str]) -> str:
     production = syntax["production"]
     rules = syntax["rules"]
 
     produced_rules = []
     for rule in rules:
         if isinstance(rule, str):
-            produced_rules.append(rule)
+            if rule in tokens or is_keyword(rule):
+                produced_rule = rule
+            else:
+                produced_rule = f"\"{rule}\""
+            produced_rules.append(produced_rule)
         elif isinstance(rule, Dict):
-            produced_rules.append(generate_rule(rule, syntax=rule))
+            produced_rules.append(generate_rule(rule, syntax=rule, tokens=tokens))
 
     if production == "or":
         rule = " | ".join(produced_rules)
@@ -42,7 +50,7 @@ def main(*, syntax_path: str, rule_names: List[str], generate_all: bool):
 
     for rule_name in rule_names:
         if rule_name in syntax_tokens:
-            rule = generate_rule(rule_name, syntax=syntax[rule_name])
+            rule = generate_rule(rule_name, syntax=syntax[rule_name], tokens=syntax_tokens)
             print(f"{rule_name} = {rule}")
         else:
             print(f"'{rule_name}' is not a valid token for syntax at '{syntax_path}")
