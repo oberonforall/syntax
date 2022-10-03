@@ -932,7 +932,7 @@ let syntax = {
                     production: "one"
                 }
             ],
-            production: "foo"
+            production: "seq"
        }
     }
 }
