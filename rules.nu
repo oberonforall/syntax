@@ -193,8 +193,23 @@ let rules = {
     },
     "RecordType": {  # RECORD ["(" BaseType ")"] [FieldListSequence] END
         rules: [
+            "RECORD",
+            {
+                rules: [
+                    {
+                        rules: ["(", "BaseType", ")"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            {
+                rules: ["FieldListSequence"],
+                production: "one"
+            },
+            "END"
         ],
-        production: "foo"
+        production: "seq"
     },
     "BaseType": {  # qualident
         rules: [
