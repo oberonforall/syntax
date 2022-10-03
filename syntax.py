@@ -1,9 +1,7 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
+import argparse
 
 import json
-
-SYNTAX_PATH = "syntax.json"
-RULE_NAME = "string"
 
 
 def generate_rule(name: str, *, syntax: Dict[str, Any]) -> str:
@@ -33,13 +31,44 @@ def generate_rule(name: str, *, syntax: Dict[str, Any]) -> str:
     return rule
 
 
-def main(*, syntax_path: str, rule_name: str):
+def main(*, syntax_path: str, rule_names: List[str]):
     with open(syntax_path, "r") as syntax_file:
         syntax = json.load(syntax_file)["rules"]
 
-    rule = generate_rule(rule_name, syntax=syntax[rule_name])
-    print(f"{RULE_NAME} = {rule}")
+    syntax_tokens = list(syntax.keys())
+
+    for rule_name in rule_names:
+        if rule_name in syntax_tokens:
+            rule = generate_rule(rule_name, syntax=syntax[rule_name])
+            print(f"{rule_name} = {rule}")
+        else:
+            print(f"'{rule_name}' is not a valid token for syntax at '{syntax_path}")
 
 
 if __name__ == "__main__":
-    main(syntax_path=SYNTAX_PATH, rule_name=RULE_NAME)
+    parser = argparse.ArgumentParser()
+
+    default = "syntax.json"
+    parser.add_argument(
+        "--path",
+        "-p",
+        type=str,
+        default=default,
+        help=f"the path to the syntax file (defaults to {default}).",
+    )
+    parser.add_argument(
+        "--rules",
+        "-r",
+        type=str,
+        nargs="+",
+        help="the list of rules to generate.",
+    )
+
+    args = parser.parse_args()
+
+    if args.rules is None:
+        print("No rules were provided...")
+        print("Terminating.")
+        exit(1)
+
+    main(syntax_path=args.path, rule_names=sorted(args.rules))
