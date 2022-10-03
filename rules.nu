@@ -652,8 +652,28 @@ let rules = {
     },
     "ProcedureBody": {  # DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END
         rules: [
+            "DeclarationSequence",
+            {
+                rules:
+                    {
+                        rules: ["BEGIN", "StatementSequence"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            {
+                rules:
+                    {
+                        rules: ["RETURN", "expression"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            "END"
         ],
-        production: "foo"
+        production: "seq"
     },
     "DeclarationSequence": {  # [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"}
         rules: [
