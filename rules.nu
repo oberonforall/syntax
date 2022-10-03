@@ -217,8 +217,18 @@ let rules = {
     },
     "FieldListSequence": {  # FieldList {";" FieldList}
         rules: [
+            "FieldList",
+            {
+                rules: [
+                    {
+                        rules: [";" "FieldList"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "FieldList": {  # IdentList ":" type
         rules: [
