@@ -236,8 +236,18 @@ let rules = {
     },
     "IdentList": {  # identdef {"," identdef}
         rules: [
+            "identdef",
+            {
+                rules: [
+                    {
+                        rules: ["," "identdef"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "PointerType": {  # POINTER TO type
         rules: [
