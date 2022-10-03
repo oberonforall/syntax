@@ -39,7 +39,7 @@ def main(*, syntax_path: str, rule_name: str):
         syntax = json.load(syntax_file)["rules"]
 
     rule = generate_rule(rule_name, syntax=syntax[rule_name])
-    print(f"'{RULE_NAME}' = '{rule}'")
+    print(f"{RULE_NAME} = {rule}")
 
 
 if __name__ == "__main__":
