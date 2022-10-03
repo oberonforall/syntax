@@ -264,9 +264,8 @@ let rules = {
         production: "seq"
     },
     "VariableDeclaration": {  # IdentList ":" type
-        rules: [
-        ],
-        production: "foo"
+        rules: ["IdentList", ":", "type"],
+        production: "seq"
     },
     "expression": {  # SimpleExpression [relation SimpleExpression]
         rules: [
