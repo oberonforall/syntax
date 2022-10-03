@@ -1,7 +1,6 @@
 from typing import Any, Dict
 
 import json
-from pprint import pprint
 
 SYNTAX_PATH = "syntax.json"
 RULE_NAME = "string"
