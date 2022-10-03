@@ -486,8 +486,18 @@ let rules = {
     },
     "StatementSequence": {  # statement {";" statement}
         rules: [
+            "statement",
+            {
+                rules: [
+                    {
+                        rules: [";", "statement"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "IfStatement": {  # IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END
         rules: [
