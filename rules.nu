@@ -330,9 +330,8 @@ let rules = {
         production: "seq"
     },
     "MulOperator": {  # "*" | "/" | DIV | MOD | "&"
-        rules: [
-        ],
-        production: "foo"
+        rules: ["*", "/", "DIV", "MOD", "&"],
+        production: "or"
     },
     "factor": {  # number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor
         rules: [
