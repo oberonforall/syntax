@@ -444,8 +444,14 @@ let rules = {
     },
     "ActualParameters": {  # "(" [ExpList] ")"
         rules: [
+            "(",
+            {
+                rules: ["ExpList"],
+                production: "one"
+            },
+            ")"
         ],
-        production: "foo"
+        production: "seq"
     },
     "statement": {  # [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement]
         rules: [
