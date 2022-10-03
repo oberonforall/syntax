@@ -1,0 +1,61 @@
+ActualParameters = "(" [ExpList] ")"
+AddOperator = "+" | "-" | OR
+ArrayType = ARRAY length {"," length} OF type
+BaseType = qualident
+CaseLabelList = LabelRange {"," LabelRange}
+CaseStatement = CASE expression OF case {"|" case} END
+ConstDeclaration = identdef "=" ConstExpression
+ConstExpression = expression
+DeclarationSequence = [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"}
+ExpList = expression {"," expression}
+FPSection = [VAR] ident {"," ident} ":" FormalType
+FieldList = IdentList ":" type
+FieldListSequence = FieldList {";" FieldList}
+ForStatement = FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END
+FormalParameters = "(" [FPSection {";" FPSection}] ")" [":" qualident]
+FormalType = {ARRAY OF} qualident
+IdentList = identdef {"," identdef}
+IfStatement = IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END
+ImportList = IMPORT import {"," import} ";"
+LabelRange = label [".." label]
+MulOperator = "*" | "/" | DIV | MOD | "&"
+PointerType = POINTER TO type
+ProcedureBody = DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END
+ProcedureCall = designator [ActualParameters]
+ProcedureDeclaration = ProcedureHeading ";" ProcedureBody ident
+ProcedureHeading = PROCEDURE identdef [FormalParameters]
+ProcedureType = PROCEDURE [FormalParameters]
+RecordType = RECORD ["(" BaseType ")"] [FieldListSequence] END
+RepeatStatement = REPEAT StatementSequence UNTIL expression
+ScaleFactor = "E" ["+" | "-"] digit {digit}
+SimpleExpression = ["+" | "-"] term {AddOperator term}
+StatementSequence = statement {";" statement}
+TypeDeclaration = identdef "=" type
+VariableDeclaration = IdentList ":" type
+WhileStatement = WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END
+assignment = designator ":=" expression
+case = [CaseLabelList ":" StatementSequence]
+designator = qualident {selector}
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+element = expression [".." expression]
+expression = SimpleExpression [relation SimpleExpression]
+factor = number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor
+hexDigit = digit | "A" | "B" | "C" | "D" | "E" | "F"
+ident = letter {letter | digit}
+identdef = ident ["*"]
+import = ident [":=" ident]
+integer = digit {digit} | digit {hexDigit} "H"
+label = integer | string | qualident
+length = ConstExpression
+letter = "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+module = MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident "."
+number = integer | real
+qualident = [ident "."] ident
+real = digit {digit} "." {digit} [ScaleFactor]
+relation = "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS
+selector = "." ident | "[" ExpList "]" | "^" | "(" qualident ")"
+set = "{" [element {"," element}] "}"
+statement = [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement]
+string = """ {character} """ | digit {hexDigit} "X"
+term = factor {MulOperator factor}
+type = qualident | ArrayType | RecordType | PointerType | ProcedureType
