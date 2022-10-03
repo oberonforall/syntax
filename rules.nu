@@ -34,9 +34,19 @@ let rules = {
     },
     "qualident": {  # [ident "."] ident
         rules: [
+            {
+                rules: [
+                    {
+                        rules: ["ident", "."],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            "ident"
         ],
-        production: "foo"
-    },
+        production: "seq"
+    }
     "identdef": {  # ident ["*"]
         rules: [
         ],
