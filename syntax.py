@@ -31,11 +31,14 @@ def generate_rule(name: str, *, syntax: Dict[str, Any]) -> str:
     return rule
 
 
-def main(*, syntax_path: str, rule_names: List[str]):
+def main(*, syntax_path: str, rule_names: List[str], generate_all: bool):
     with open(syntax_path, "r") as syntax_file:
         syntax = json.load(syntax_file)["rules"]
 
     syntax_tokens = list(syntax.keys())
+
+    if generate_all:
+        rule_names = sorted(syntax_tokens)
 
     for rule_name in rule_names:
         if rule_name in syntax_tokens:
@@ -63,12 +66,22 @@ if __name__ == "__main__":
         nargs="+",
         help="the list of rules to generate.",
     )
+    parser.add_argument(
+        "--all",
+        "-a",
+        action="store_true",
+        help="generates all syntax rules (overwrites --rules).",
+    )
 
     args = parser.parse_args()
 
-    if args.rules is None:
+    if args.rules is None and not args.all:
         print("No rules were provided...")
         print("Terminating.")
         exit(1)
 
-    main(syntax_path=args.path, rule_names=sorted(args.rules))
+    main(
+        syntax_path=args.path,
+        rule_names=sorted(args.rules) if not args.all else None,
+        generate_all=args.all,
+    )
