@@ -19,10 +19,10 @@ def generate_rule(name: str, *, syntax: Dict[str, Any]) -> str:
         rule = " | ".join(produced_rules)
     elif production == "any":
         inner = " ".join(produced_rules)
-        rule = "{ %s }" % inner
+        rule = "{%s}" % inner
     elif production == "one":
         inner = " ".join(produced_rules)
-        rule = f"[ {inner} ]"
+        rule = f"[{inner}]"
     elif production == "seq":
         rule = " ".join(produced_rules)
     else:
