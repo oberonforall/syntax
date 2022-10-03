@@ -747,7 +747,7 @@ let rules = {
                 production: "any"
             }
         ],
-        production: "foo"
+        production: "seq"
     },
     "FormalParameters": {  # "(" [FPSection {";" FPSection}] ")" [":" qualident]
         rules: [
