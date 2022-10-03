@@ -255,8 +255,13 @@ let rules = {
     },
     "ProcedureType": {  # PROCEDURE [FormalParameters]
         rules: [
+            "PROCEDURE",
+            {
+                rules: ["FormalParameters"],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "VariableDeclaration": {  # IdentList ":" type
         rules: [
