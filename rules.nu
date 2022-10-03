@@ -128,8 +128,30 @@ let rules = {
     },
     "string": {  # """ {character} """ | digit {hexDigit} "X"
         rules: [
+            {
+                rules: [
+                    "\"",
+                    {
+                        rules: ["character"],
+                        production: "any"
+                    },
+                    "\""
+                ],
+                production: "seq"
+            },
+            {
+                rules: [
+                    "digit",
+                    {
+                        rules: ["hexDigit"],
+                        production: "any"
+                    },
+                    "X"
+                ],
+                production: "seq"
+            }
         ],
-        production: "foo"
+        production: "or"
     },
     "ConstDeclaration": {  # identdef "=" ConstExpression
         rules: [
