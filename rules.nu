@@ -860,7 +860,17 @@ let rules = {
     },
     "import": {  # ident [":=" ident]
         rules: [
+            "ident",
+            {
+                rules: [
+                    {
+                        rules: [":=", "ident"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
    }
 }
