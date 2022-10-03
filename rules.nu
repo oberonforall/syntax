@@ -591,8 +591,22 @@ let rules = {
     },
     "WhileStatement": {  # WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END
         rules: [
+            "WHILE",
+            "expression",
+            "DO",
+            "StatementSequence",
+            {
+                rules: [
+                    {
+                        rules: ["ELSIF", "expression", "DO", "StatementSequence"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            },
+            "END"
         ],
-        production: "foo"
+        production: "seq"
     },
     "RepeatStatement": {  # REPEAT StatementSequence UNTIL expression
         rules: [
