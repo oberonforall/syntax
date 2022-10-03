@@ -123,9 +123,8 @@ let rules = {
         production: "seq"
     },
     "number": {  # integer | real
-        rules: [
-        ],
-        production: "foo"
+        rules: ["integer", "real"],
+        production: "or"
     },
     "string": {  # """ {character} """ | digit {hexDigit} "X"
         rules: [
