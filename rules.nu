@@ -818,8 +818,28 @@ let rules = {
     },
     "module": {  # MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident "."
         rules: [
+            "MODULE",
+            "ident",
+            ";",
+            {
+                rules: ["ImportList"],
+                production: "one"
+            }
+            "DeclarationSequence",
+            {
+                rules: [
+                    {
+                        rules: ["BEGIN", "StatementSequence"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            }
+            "END",
+            "ident",
+            "."
         ],
-        production: "foo"
+        production: "seq"
     },
     "ImportList": {  # IMPORT import {"," import} ";"
         rules: [
