@@ -1,0 +1,11 @@
+Name,Argument type,Result type,Function
+ABS,x: numeric type,type of x,absolute value
+ASR,"x, n: INTEGER",INTEGER,"signed shift right, x DIV 2"
+CHR,x: INTEGER,CHAR,character with ordinal number x
+FLOOR,x: REAL,INTEGER,round down
+FLT,x: INTEGER,REAL,identity
+LEN,v: array,INTEGER,the length of v
+LSL,"x, n: INTEGER",INTEGER,"logical shift left, x * 2^n"
+ODD,x: INTEGER,BOOLEAN,x MOD 2 = 1
+ORD,"x: CHAR, BOOLEAN, SET",INTEGER,ordinal number of x
+ROR,"x, n: INTEGER",INTEGER,x rotated right by n bits

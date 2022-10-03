@@ -1,0 +1,5 @@
+Name,Argument type,Function
+SYSTEM.COPY,"src, dst, n: INTEGER",copy n consecutive words from src to dst
+SYSTEM.GET,a: INTEGER; v: any basic type,v := mem[a]
+SYSTEM.LED,n: INTEGER,display n on LEDs
+SYSTEM.PUT,a: INTEGER; x: any basic type,mem[a] := x
