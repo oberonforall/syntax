@@ -471,9 +471,8 @@ let rules = {
         production: "one"
     },
     "assignment": {  # designator ":=" expression
-        rules: [
-        ],
-        production: "foo"
+        rules: ["designator", ":=", "expression"],
+        production: "seq"
     },
     "ProcedureCall": {  # designator [ActualParameters]
         rules: [
