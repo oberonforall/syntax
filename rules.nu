@@ -586,9 +586,8 @@ let rules = {
         production: "seq"
     },
     "label": {  # integer | string | qualident
-        rules: [
-        ],
-        production: "foo"
+        rules: ["integer", "string", "qualident"],
+        production: "or"
     },
     "WhileStatement": {  # WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END
         rules: [
