@@ -1,22 +1,26 @@
 let rules = {
+
     "letter": {  # "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
         rules: [
             "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         ],
         production: "or"
     },
+
     "digit": {  # "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
         rules: [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
         ],
         production: "or"
     },
+
     "hexDigit": {  # digit | "A" | "B" | "C" | "D" | "E" | "F"
         rules: [
             "digit", "A", "B", "C", "D", "E", "F"
         ],
         production: "or"
     },
+
     "ident": {  # letter {letter | digit}
         rules: [
             "letter",
@@ -32,6 +36,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "qualident": {  # [ident "."] ident
         rules: [
             {
@@ -57,6 +62,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "integer": {  # digit {digit} | digit {hexDigit} "H"
         rules: [
             {
@@ -83,6 +89,7 @@ let rules = {
         ],
         production: "or"
     },
+
     "real": {  # digit {digit} "." {digit} [ScaleFactor]
         rules: [
             "digit",
@@ -102,6 +109,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "ScaleFactor": {  # "E" ["+" | "-"] digit {digit}
         rules: [
             "E",
@@ -122,10 +130,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "number": {  # integer | real
         rules: ["integer", "real"],
         production: "or"
     },
+
     "string": {  # """ {character} """ | digit {hexDigit} "X"
         rules: [
             {
@@ -153,22 +163,27 @@ let rules = {
         ],
         production: "or"
     },
+
     "ConstDeclaration": {  # identdef "=" ConstExpression
         rules: ["identdef", "=", "ConstExpression"],
         production: "seq"
     },
+
     "ConstExpression": {  # expression
         rules: ["expression"],
         production: "seq"
     },
+
     "TypeDeclaration": {  # identdef "=" type
         rules: ["identdef", "=", "type"],
         production: "seq"
     },
+
     "type": {  # qualident | ArrayType | RecordType | PointerType | ProcedureType
         rules: ["qualident", "ArrayType", "RecordType", "PointerType", "ProcedureType"],
         production: "or"
     },
+
     "ArrayType": {  # ARRAY length {"," length} OF type
         rules: [
             "ARRAY",
@@ -187,10 +202,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "length": {  # ConstExpression
         rules: ["ConstExpression"],
         production: "seq"
     },
+
     "RecordType": {  # RECORD ["(" BaseType ")"] [FieldListSequence] END
         rules: [
             "RECORD",
@@ -211,10 +228,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "BaseType": {  # qualident
         rules: ["qualident"],
         production: "seq"
     },
+
     "FieldListSequence": {  # FieldList {";" FieldList}
         rules: [
             "FieldList",
@@ -230,10 +249,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "FieldList": {  # IdentList ":" type
         rules: ["IdentList", ":", "type"],
         production: "seq"
     },
+
     "IdentList": {  # identdef {"," identdef}
         rules: [
             "identdef",
@@ -249,10 +270,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "PointerType": {  # POINTER TO type
         rules: ["POINTER", "TO", "type"],
         production: "seq"
     },
+
     "ProcedureType": {  # PROCEDURE [FormalParameters]
         rules: [
             "PROCEDURE",
@@ -263,10 +286,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "VariableDeclaration": {  # IdentList ":" type
         rules: ["IdentList", ":", "type"],
         production: "seq"
     },
+
     "expression": {  # SimpleExpression [relation SimpleExpression]
         rules: [
             "SimpleExpression",
@@ -282,10 +307,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "relation": {  # "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS
         rules: ["=", "#", "<", "<=", ">", ">=", "IN", "IS"],
         production: "or"
     },
+
     "SimpleExpression": {  # ["+" | "-"] term {AddOperator term}
         rules: [
             {
@@ -310,10 +337,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "AddOperator": {  # "+" | "-" | OR
         rules: ["+", "-", "OR"],
         production: "or"
     },
+
     "term": {  # factor {MulOperator factor}
         rules: [
             "factor",
@@ -329,10 +358,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "MulOperator": {  # "*" | "/" | DIV | MOD | "&"
         rules: ["*", "/", "DIV", "MOD", "&"],
         production: "or"
     },
+
     "factor": {  # number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor
         rules: [
             "number",
@@ -362,6 +393,7 @@ let rules = {
         ],
         production: "or"
     },
+
     "designator": {  # qualident {selector}
         rules: [
             "qualident",
@@ -372,6 +404,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "selector": {  # "." ident | "[" ExpList "]" | "^" | "(" qualident ")"
         rules: [
             {
@@ -390,6 +423,7 @@ let rules = {
         ],
         production: "or"
     },
+
     "set": {  # "{" [element {"," element}] "}"
         rules: [
             "{",
@@ -412,6 +446,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "element": {  # expression [".." expression]
         rules: [
             "expression",
@@ -427,6 +462,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "ExpList": {  # expression {"," expression}
         rules: [
             "expression",
@@ -442,6 +478,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "ActualParameters": {  # "(" [ExpList] ")"
         rules: [
             "(",
@@ -453,6 +490,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "statement": {  # [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement]
         rules: [
             {
@@ -470,10 +508,12 @@ let rules = {
         ],
         production: "one"
     },
+
     "assignment": {  # designator ":=" expression
         rules: ["designator", ":=", "expression"],
         production: "seq"
     },
+
     "ProcedureCall": {  # designator [ActualParameters]
         rules: [
             "designator",
@@ -484,6 +524,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "StatementSequence": {  # statement {";" statement}
         rules: [
             "statement",
@@ -499,6 +540,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "IfStatement": {  # IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END
         rules: [
             "IF",
@@ -527,6 +569,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "CaseStatement": {  # CASE expression OF case {"|" case} END
         rules: [
             "CASE",
@@ -546,6 +589,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "case": {  # [CaseLabelList ":" StatementSequence]
         rules: [
             {
@@ -555,6 +599,7 @@ let rules = {
         ],
         production: "one"
     },
+
     "CaseLabelList": {  # LabelRange {"," LabelRange}
         rules: [
             "LabelRange",
@@ -570,6 +615,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "LabelRange": {  # label [".." label]
         rules: [
             "label",
@@ -585,10 +631,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "label": {  # integer | string | qualident
         rules: ["integer", "string", "qualident"],
         production: "or"
     },
+
     "WhileStatement": {  # WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END
         rules: [
             "WHILE",
@@ -608,10 +656,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "RepeatStatement": {  # REPEAT StatementSequence UNTIL expression
         rules: ["REPEAT", "StatementSequence", "UNTIL", "expression"],
         production: "seq"
     },
+
     "ForStatement": {  # FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END
         rules: [
             "FOR",
@@ -635,10 +685,12 @@ let rules = {
         ],
         production: "seq"
     },
+
     "ProcedureDeclaration": {  # ProcedureHeading ";" ProcedureBody ident
         rules: ["ProcedureHeading", ";", "ProcedureBody", "ident"],
         production: "seq"
     },
+
     "ProcedureHeading": {  # PROCEDURE identdef [FormalParameters]
         rules: [
             "PROCEDURE",
@@ -650,6 +702,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "ProcedureBody": {  # DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END
         rules: [
             "DeclarationSequence",
@@ -675,6 +728,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "DeclarationSequence": {  # [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"}
         rules: [
             {
@@ -749,6 +803,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "FormalParameters": {  # "(" [FPSection {";" FPSection}] ")" [":" qualident]
         rules: [
             "(",
@@ -780,6 +835,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "FPSection": {  # [VAR] ident {"," ident} ":" FormalType
         rules: [
             {
@@ -801,6 +857,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "FormalType": {  # {ARRAY OF} qualident
         rules: [
             {
@@ -816,6 +873,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "module": {  # MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident "."
         rules: [
             "MODULE",
@@ -841,6 +899,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "ImportList": {  # IMPORT import {"," import} ";"
         rules: [
             "IMPORT",
@@ -858,6 +917,7 @@ let rules = {
         ],
         production: "seq"
     },
+
     "import": {  # ident [":=" ident]
         rules: [
             "ident",
@@ -871,6 +931,7 @@ let rules = {
                 production: "one"
             }
         ],
-        production: "seq"
+        production: "foo"
    }
+
 }
