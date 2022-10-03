@@ -335,8 +335,32 @@ let rules = {
     },
     "factor": {  # number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor
         rules: [
+            "number",
+            "string",
+            "NIL",
+            "TRUE",
+            "FALSE",
+            "set",
+            {
+                rules: [
+                    "designator",
+                    {
+                        rules: ["ActualParameters"],
+                        production: "one"
+                    }
+                ],
+                production: "seq"
+            },
+            {
+                rules: ["(", "expression", ")"],
+                production: "seq"
+            },
+            {
+                rules: ["~", "factor"],
+                production: "seq"
+            }
         ],
-        production: "foo"
+        production: "or"
     },
     "designator": {  # qualident {selector}
         rules: [
