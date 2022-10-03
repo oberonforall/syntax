@@ -13,8 +13,9 @@ let rules = {
     },
     "hexDigit": {  # digit | "A" | "B" | "C" | "D" | "E" | "F"
         rules: [
+            "digit", "A", "B", "C", "D", "E", "F"
         ],
-        production: "foo"
+        production: "or"
     },
     "ident": {  # letter {letter | digit}
         rules: [
