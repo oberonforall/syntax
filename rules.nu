@@ -414,8 +414,18 @@ let rules = {
     },
     "element": {  # expression [".." expression]
         rules: [
+            "expression",
+            {
+                rules: [
+                    {
+                        rules: [".." "expression"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "ExpList": {  # expression {"," expression}
         rules: [
