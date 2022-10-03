@@ -269,8 +269,18 @@ let rules = {
     },
     "expression": {  # SimpleExpression [relation SimpleExpression]
         rules: [
+            "SimpleExpression",
+            {
+                rules: [
+                    {
+                        rules: ["relation", "SimpleExpression"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "relation": {  # "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS
         rules: [
