@@ -557,8 +557,18 @@ let rules = {
     },
     "CaseLabelList": {  # LabelRange {"," LabelRange}
         rules: [
+            "LabelRange",
+            {
+                rules: [
+                    {
+                        rules: [",", "LabelRange"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "LabelRange": {  # label [".." label]
         rules: [
