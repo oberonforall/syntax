@@ -188,9 +188,8 @@ let rules = {
         production: "seq"
     },
     "length": {  # ConstExpression
-        rules: [
-        ],
-        production: "foo"
+        rules: ["ConstExpression"],
+        production: "seq"
     },
     "RecordType": {  # RECORD ["(" BaseType ")"] [FieldListSequence] END
         rules: [
