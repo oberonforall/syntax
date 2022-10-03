@@ -528,6 +528,23 @@ let rules = {
         production: "seq"
     },
     "CaseStatement": {  # CASE expression OF case {"|" case} END
+        rules: [
+            "CASE",
+            "expression",
+            "OF",
+            "case",
+            {
+                rules: [
+                    {
+                        rules: ["|", "case"],
+                        production: "seq"
+                    },
+                ],
+                production: "any"
+            },
+            "END"
+        ],
+        production: "seq"
     },
     "case": {  # [CaseLabelList ":" StatementSequence]
         rules: [
