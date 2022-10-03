@@ -677,6 +677,75 @@ let rules = {
     },
     "DeclarationSequence": {  # [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"}
         rules: [
+            {
+                rules: [
+                    {
+                        rules: [
+                            "CONST",
+                            {
+                                rules: [
+                                    {
+                                        rules: ["ConstDeclaration", ";"],
+                                        production: "seq"
+                                    }
+                                ],
+                                production: "any"
+                            }
+                        ],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            {
+                rules: [
+                    {
+                        rules: [
+                            "TYPE",
+                            {
+                                rules: [
+                                    {
+                                        rules: ["TypeDeclaration", ";"],
+                                        production: "seq"
+                                    }
+                                ],
+                                production: "any"
+                            }
+                        ],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            {
+                rules: [
+                    {
+                        rules: [
+                            "VAR",
+                            {
+                                rules: [
+                                    {
+                                        rules: ["VariableDeclaration", ";"],
+                                        production: "seq"
+                                    }
+                                ],
+                                production: "any"
+                            }
+                        ],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            },
+            {
+                rules: [
+                    {
+                        rules: ["ProcedureDeclaration", ";"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
         production: "foo"
     },
