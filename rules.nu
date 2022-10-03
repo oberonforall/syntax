@@ -751,8 +751,34 @@ let rules = {
     },
     "FormalParameters": {  # "(" [FPSection {";" FPSection}] ")" [":" qualident]
         rules: [
+            "(",
+            {
+                rules: [
+                    {
+                        rules: [
+                            "FPSection",
+                            {
+                                rules: [";" "FPSection"],
+                                production: "any"
+                            }
+                        ],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            }
+            ")",
+            {
+                rules: [
+                    {
+                        rules: [":", "qualident"],
+                        production: "seq"
+                    }
+                ],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "FPSection": {  # [VAR] ident {"," ident} ":" FormalType
         rules: [
