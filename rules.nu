@@ -49,8 +49,13 @@ let rules = {
     }
     "identdef": {  # ident ["*"]
         rules: [
+            "ident",
+            {
+                rules: ["*"],
+                production: "one"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "integer": {  # digit {digit} | digit {hexDigit} "H"
         rules: [
