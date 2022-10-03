@@ -288,8 +288,27 @@ let rules = {
     },
     "SimpleExpression": {  # ["+" | "-"] term {AddOperator term}
         rules: [
+            {
+                rules: [
+                    {
+                        rules: ["+", "-"],
+                        production: "or"
+                    }
+                ],
+                production: "one"
+            },
+            "term",
+            {
+                rules: [
+                    {
+                        rules: ["AddOperator" "term"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "AddOperator": {  # "+" | "-" | OR
         rules: [
