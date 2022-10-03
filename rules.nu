@@ -782,8 +782,24 @@ let rules = {
     },
     "FPSection": {  # [VAR] ident {"," ident} ":" FormalType
         rules: [
+            {
+                rules: ["VAR"],
+                production: "one"
+            },
+            "ident",
+            {
+                rules: [
+                    {
+                        rules: [",", "ident"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            },
+            ":",
+            "FormalType"
         ],
-        production: "foo"
+        production: "seq"
     },
     "FormalType": {  # {ARRAY OF} qualident
         rules: [
