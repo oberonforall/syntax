@@ -283,9 +283,8 @@ let rules = {
         production: "seq"
     },
     "relation": {  # "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS
-        rules: [
-        ],
-        production: "foo"
+        rules: ["=", "#", "<", "<=", ">", ">=", "IN", "IS"],
+        production: "or"
     },
     "SimpleExpression": {  # ["+" | "-"] term {AddOperator term}
         rules: [
