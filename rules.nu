@@ -162,9 +162,8 @@ let rules = {
         production: "seq"
     },
     "TypeDeclaration": {  # identdef "=" type
-        rules: [
-        ],
-        production: "foo"
+        rules: ["identdef", "=", "type"],
+        production: "seq"
     },
     "type": {  # qualident | ArrayType | RecordType | PointerType | ProcedureType
         rules: [
