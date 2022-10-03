@@ -231,9 +231,8 @@ let rules = {
         production: "seq"
     },
     "FieldList": {  # IdentList ":" type
-        rules: [
-        ],
-        production: "foo"
+        rules: ["IdentList", ":", "type"],
+        production: "seq"
     },
     "IdentList": {  # identdef {"," identdef}
         rules: [
