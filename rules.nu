@@ -316,8 +316,18 @@ let rules = {
     },
     "term": {  # factor {MulOperator factor}
         rules: [
+            "factor",
+            {
+                rules: [
+                    {
+                        rules: ["MulOperator" "factor"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "MulOperator": {  # "*" | "/" | DIV | MOD | "&"
         rules: [
