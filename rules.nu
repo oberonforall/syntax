@@ -636,9 +636,8 @@ let rules = {
         production: "seq"
     },
     "ProcedureDeclaration": {  # ProcedureHeading ";" ProcedureBody ident
-        rules: [
-        ],
-        production: "foo"
+        rules: ["ProcedureHeading", ";", "ProcedureBody", "ident"],
+        production: "seq"
     },
     "ProcedureHeading": {  # PROCEDURE identdef [FormalParameters]
         rules: [
