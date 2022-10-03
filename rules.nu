@@ -455,8 +455,20 @@ let rules = {
     },
     "statement": {  # [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement]
         rules: [
+            {
+                rules: [
+                    "assignment",
+                    "ProcedureCall",
+                    "IfStatement",
+                    "CaseStatement",
+                    "WhileStatement",
+                    "RepeatStatement",
+                    "ForStatement"
+                ],
+                production: "or"
+            }
         ],
-        production: "foo"
+        production: "one"
     },
     "assignment": {  # designator ":=" expression
         rules: [
