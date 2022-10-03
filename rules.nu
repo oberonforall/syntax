@@ -59,8 +59,29 @@ let rules = {
     },
     "integer": {  # digit {digit} | digit {hexDigit} "H"
         rules: [
+            {
+                rules: [
+                    "digit",
+                    {
+                        rules: ["digit"],
+                        production: "any"
+                    }
+                ],
+                production: "seq"
+            },
+            {
+                rules: [
+                    "digit",
+                    {
+                        rules: ["hexDigit"],
+                        production: "any"
+                    },
+                    "H"
+                ],
+                production: "seq"
+            },
         ],
-        production: "foo"
+        production: "or"
     },
     "real": {  # digit {digit} "." {digit} [ScaleFactor]
         rules: [
