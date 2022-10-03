@@ -843,8 +843,20 @@ let rules = {
     },
     "ImportList": {  # IMPORT import {"," import} ";"
         rules: [
+            "IMPORT",
+            "import",
+            {
+                rules: [
+                    {
+                        rules: [",", "import"],
+                        production: "seq"
+                    }
+                ],
+                production: "any"
+            },
+            ";"
         ],
-        production: "foo"
+        production: "seq"
     },
     "import": {  # ident [":=" ident]
         rules: [
