@@ -19,8 +19,20 @@ let rules = {
     },
     "ident": {  # letter {letter | digit}
         rules: [
+            "letter",
+            {
+                rules: [
+                    {
+                        rules: [
+                            "letter", "digit"
+                        ],
+                        production: "or"
+                    }
+                ],
+                production: "any"
+            }
         ],
-        production: "foo"
+        production: "seq"
     },
     "qualident": {  # [ident "."] ident
         rules: [
