@@ -548,8 +548,12 @@ let rules = {
     },
     "case": {  # [CaseLabelList ":" StatementSequence]
         rules: [
+            {
+                rules: ["CaseLabelList", ":", "StatementSequence"],
+                production: "seq"
+            }
         ],
-        production: "foo"
+        production: "one"
     },
     "CaseLabelList": {  # LabelRange {"," LabelRange}
         rules: [
