@@ -49,7 +49,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 "ident"
             ],
@@ -60,7 +60,7 @@ let syntax = {
                 "ident",
                 {
                     rules: ["*"],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -107,7 +107,7 @@ let syntax = {
                 },
                 {
                     rules: ["ScaleFactor"],
-                    production: "one"
+                    production: "opt"
                 },
             ],
             production: "seq"
@@ -123,7 +123,7 @@ let syntax = {
                             production: "or"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 "digit",
                 {
@@ -241,11 +241,11 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 {
                     rules: ["FieldListSequence"],
-                    production: "one"
+                    production: "opt"
                 },
                 "END"
             ],
@@ -304,7 +304,7 @@ let syntax = {
                 "PROCEDURE",
                 {
                     rules: ["FormalParameters"],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -325,7 +325,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -345,7 +345,7 @@ let syntax = {
                             production: "or"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 "term",
                 {
@@ -400,7 +400,7 @@ let syntax = {
                         "designator",
                         {
                             rules: ["ActualParameters"],
-                            production: "one"
+                            production: "opt"
                         }
                     ],
                     production: "seq"
@@ -463,7 +463,7 @@ let syntax = {
                             production: "any"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 "}"
             ],
@@ -480,7 +480,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -507,7 +507,7 @@ let syntax = {
                 "(",
                 {
                     rules: ["ExpList"],
-                    production: "one"
+                    production: "opt"
                 },
                 ")"
             ],
@@ -529,7 +529,7 @@ let syntax = {
                     production: "or"
                 }
             ],
-            production: "one"
+            production: "opt"
         },
 
         "assignment": {  # designator ":=" expression
@@ -542,7 +542,7 @@ let syntax = {
                 "designator",
                 {
                     rules: ["ActualParameters"],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -586,7 +586,7 @@ let syntax = {
                             production: "seq"
                         },
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 "END"
             ],
@@ -620,7 +620,7 @@ let syntax = {
                     production: "seq"
                 }
             ],
-            production: "one"
+            production: "opt"
         },
 
         "CaseLabelList": {  # LabelRange {"," LabelRange}
@@ -649,7 +649,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -700,7 +700,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 "DO",
                 "StatementSequence",
@@ -720,7 +720,7 @@ let syntax = {
                 "identdef",
                 {
                     rules: ["FormalParameters"],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -736,7 +736,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 {
                     rules: [
@@ -745,7 +745,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 "END"
             ],
@@ -772,7 +772,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 {
                     rules: [
@@ -792,7 +792,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 {
                     rules: [
@@ -812,7 +812,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 },
                 {
                     rules: [
@@ -843,7 +843,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 }
                 ")",
                 {
@@ -853,7 +853,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"
@@ -863,7 +863,7 @@ let syntax = {
             rules: [
                 {
                     rules: ["VAR"],
-                    production: "one"
+                    production: "opt"
                 },
                 "ident",
                 {
@@ -904,7 +904,7 @@ let syntax = {
                 ";",
                 {
                     rules: ["ImportList"],
-                    production: "one"
+                    production: "opt"
                 }
                 "DeclarationSequence",
                 {
@@ -914,7 +914,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 }
                 "END",
                 "ident",
@@ -951,7 +951,7 @@ let syntax = {
                             production: "seq"
                         }
                     ],
-                    production: "one"
+                    production: "opt"
                 }
             ],
             production: "seq"

@@ -30,7 +30,7 @@ def generate_rule(name: str, *, syntax: Dict[str, Any], tokens: List[str]) -> st
     elif production == "any":
         inner = " ".join(produced_rules)
         rule = "{%s}" % inner
-    elif production == "one":
+    elif production == "opt":
         inner = " ".join(produced_rules)
         rule = f"[{inner}]"
     elif production == "seq":
