@@ -8,7 +8,7 @@ reconstruction_file=".generated.txt"
 ./scripts/syntax.nu > "$syntax_file"
 echo "Syntax file generated at '$syntax_file'"
 
-python ./scripts/syntax.py --all --path "$syntax_file" > "$reconstruction_file"
+./scripts/syntax.py --all --path "$syntax_file" > "$reconstruction_file"
 echo "Reconstructed file generated at '$reconstruction_file'"
 
 vimdiff "$rule_file" "$reconstruction_file"
