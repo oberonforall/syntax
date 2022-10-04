@@ -960,3 +960,4 @@ let syntax = {
 }
 
 $syntax | save syntax.json
+print "Syntax saved in 'syntax.json'"
