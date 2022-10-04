@@ -1,3 +1,5 @@
+#!/usr/bin/env nu
+
 let syntax = {
     "rules": {
 
@@ -956,3 +958,5 @@ let syntax = {
        }
     }
 }
+
+$syntax | save syntax.json
