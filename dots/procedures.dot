@@ -1,0 +1,47 @@
+digraph procedures {
+    ProcedureDeclaration -> ProcedureHeading;
+    ProcedureDeclaration -> ";";
+    ProcedureDeclaration -> ProcedureBody;
+    ProcedureDeclaration -> ident;
+
+    ProcedureHeading -> PROCEDURE;
+    ProcedureHeading -> identdef;
+    ProcedureHeading -> FormalParameters;
+
+    ProcedureBody -> DeclarationSequence;
+    ProcedureBody -> BEGIN;
+    ProcedureBody -> StatementSequence;
+    ProcedureBody -> RETURN;
+    ProcedureBody -> expression;
+    ProcedureBody -> END;
+
+    DeclarationSequence -> CONST;
+    DeclarationSequence -> ConstDeclaration;
+    DeclarationSequence -> ";";
+    DeclarationSequence -> TYPE;
+    DeclarationSequence -> TypeDeclaration;
+    DeclarationSequence -> VAR;
+    DeclarationSequence -> VariableDeclaration;
+    DeclarationSequence -> ProcedureDeclaration;
+
+    FormalParameters -> "(";
+    FormalParameters -> FPSection;
+    FormalParameters -> ";";
+    FormalParameters -> ")";
+    FormalParameters -> ":";
+    FormalParameters -> qualident;
+
+    FPSection -> VAR;
+    FPSection -> ident;
+    FPSection -> ",";
+    FPSection -> ":";
+    FPSection -> FormalType;
+
+    FormalType -> ARRAY;
+    FormalType -> OF;
+    FormalType -> qualident;
+
+    ProcedureCall -> designator;
+    ProcedureCall -> ActualParameters;
+
+}

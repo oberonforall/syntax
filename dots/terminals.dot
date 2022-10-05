@@ -1,0 +1,43 @@
+digraph terminals {
+    letter;
+    digit;
+    hexDigit -> digit;
+
+    ident -> letter;
+    ident -> digit;
+
+    qualident -> ident;
+    qualident -> ".";
+
+    identdef -> ident;
+    identdef -> "*";
+
+    integer -> digit;
+    integer -> hexDigit;
+    integer -> "H";
+
+    real -> digit;
+    real -> ".";
+    real -> ScaleFactor;
+
+    ScaleFactor -> "E";
+    ScaleFactor -> "+";
+    ScaleFactor -> "-";
+    ScaleFactor -> digit;
+
+    number -> integer;
+    number -> real;
+
+    string -> quote;
+    string -> character;
+    string -> digit;
+    string -> hexDigit;
+    string -> "X";
+
+    ConstDeclaration -> identdef;
+    ConstDeclaration -> "=";
+    ConstDeclaration -> ConstExpression;
+
+    ConstExpression -> expression;
+}
+

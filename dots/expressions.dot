@@ -1,0 +1,74 @@
+digraph expressions {
+    expression -> SimpleExpression;
+    expression -> relation;
+
+    relation -> "=";
+    relation -> "#";
+    relation -> "<";
+    relation -> "<=";
+    relation -> ">";
+    relation -> ">=";
+    relation -> IN;
+    relation -> IS;
+
+    SimpleExpression -> "+";
+    SimpleExpression -> "-";
+    SimpleExpression -> term;
+    SimpleExpression -> AddOperator;
+
+    AddOperator -> "+";
+    AddOperator -> "-";
+    AddOperator -> OR;
+
+    term -> factor;
+    term -> MulOperator;
+
+    MulOperator -> "*";
+    MulOperator -> "/";
+    MulOperator -> DIV;
+    MulOperator -> MOD;
+    MulOperator -> "&";
+
+    factor -> number;
+    factor -> string;
+    factor -> NIL;
+    factor -> TRUE;
+    factor -> FALSE;
+    factor -> set;
+    factor -> designator;
+    factor -> ActualParameters;
+    factor -> "(";
+    factor -> expression;
+    factor -> ")";
+    factor -> "~";
+    factor -> factor;
+
+    designator -> qualident;
+    designator -> selector;
+
+    selector -> ".";
+    selector -> ident;
+    selector -> "[";
+    selector -> ExpList;
+    selector -> "]";
+    selector -> "^";
+    selector -> "(";
+    selector -> qualident;
+    selector -> ")";
+
+    set -> "{"
+    set -> element;
+    set -> ",";
+    set -> "}";
+
+    element -> expression;
+    element -> "..";
+
+    ExpList -> expression;
+    ExpList -> ",";
+
+    ActualParameters -> "(";
+    ActualParameters -> ExpList;
+    ActualParameters -> ")";
+}
+

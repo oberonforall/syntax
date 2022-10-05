@@ -1,0 +1,69 @@
+digraph control {
+    WhileStatement -> WHILE;
+    WhileStatement -> expression;
+    WhileStatement -> DO;
+    WhileStatement -> StatementSequence;
+    WhileStatement -> ELSIF;
+    WhileStatement -> END;
+
+    RepeatStatement -> REPEAT;
+    RepeatStatement -> StatementSequence;
+    RepeatStatement -> UNTIL;
+    RepeatStatement -> expression;
+
+    ForStatement -> FOR;
+    ForStatement -> ident;
+    ForStatement -> ":=";
+    ForStatement -> expression;
+    ForStatement -> TO;
+    ForStatement -> BY;
+    ForStatement -> ConstExpression;
+    ForStatement -> DO;
+    ForStatement -> StatementSequence;
+    ForStatement -> END;
+
+    statement -> assignment;
+    statement -> ProcedureCall;
+    statement -> IfStatement;
+    statement -> CaseStatement;
+    statement -> WhileStatement;
+    statement -> RepeatStatement;
+    statement -> ForStatement;
+
+    assignment -> designator;
+    assignment -> ":=";
+    assignment -> expression;
+
+    StatementSequence -> statement;
+    StatementSequence -> ";";
+
+    IfStatement -> IF;
+    IfStatement -> expression;
+    IfStatement -> THEN;
+    IfStatement -> StatementSequence;
+    IfStatement -> ELSIF;
+    IfStatement -> ELSE;
+    IfStatement -> END;
+
+    CaseStatement -> CASE;
+    CaseStatement -> expression;
+    CaseStatement -> OF;
+    CaseStatement -> case;
+    CaseStatement -> "|";
+    CaseStatement -> END;
+
+    case -> CaseLabelList;
+    case -> ":";
+    case -> StatementSequence;
+
+    CaseLabelList -> LabelRange;
+    CaseLabelList -> ",";
+
+    LabelRange -> label;
+    LabelRange -> "..";
+
+    label -> integer;
+    label -> string;
+    label -> qualident;
+}
+

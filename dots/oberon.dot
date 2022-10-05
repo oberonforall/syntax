@@ -1,0 +1,34 @@
+# this is the syntax graph of the Oberon programming language,
+# as defined in https://people.inf.ethz.ch/wirth/Oberon/Oberon07.Report.pdf
+#
+# this can be easily rendered with the `dot` command on linux systems
+# (`dot` is shipped in the graphviz package on ArchLinux)
+#
+#       ```bash
+#       dot -Tpng oberon.dot > oberon.png
+#       feh oberon.png
+#       ```
+
+digraph module {
+    "built-ins" -> "function procedures";
+    "built-ins" -> "type conversion";
+    "built-ins" -> "proper procedures";
+
+    module -> MODULE;
+    module -> ident;
+    module -> ";";
+    module -> ImportList;
+    module -> DeclarationSequence;
+    module -> BEGIN;
+    module -> StatementSequence;
+    module -> END;
+    module -> ".";
+
+    ImportList -> IMPORT;
+    ImportList -> import;
+    ImportList -> ",";
+    ImportList -> ";";
+
+    import -> ident;
+    import -> ":=";
+}

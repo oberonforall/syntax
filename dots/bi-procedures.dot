@@ -1,0 +1,16 @@
+digraph procedures {
+    "proper procedures" -> "INC(v)";
+    "proper procedures" -> "INC(v, n)";
+    "proper procedures" -> "DEC(v)";
+    "proper procedures" -> "DEC(v, n)";
+    "proper procedures" -> "INCL(v, x)";
+    "proper procedures" -> "EXCL(v, x)";
+    "proper procedures" -> "NEW(v)";
+    "proper procedures" -> "ASSERT(b)";
+    "proper procedures" -> "PACK(x, n)";
+    "proper procedures" -> "UNPK(x, n)";
+    "proper procedures" -> "SYSTEM.GET(a, v)";
+    "proper procedures" -> "SYSTEM.PUT(a, x)";
+    "proper procedures" -> "SYSTEM.COPY(src, dst, n)";
+    "proper procedures" -> "RISC.LED(n)";
+}

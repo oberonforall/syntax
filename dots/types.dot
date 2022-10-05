@@ -1,0 +1,50 @@
+digraph types {
+    TypeDeclaration -> identdef;
+    TypeDeclaration -> type;
+    TypeDeclaration -> "=";
+
+    type -> qualident;
+    type -> ArrayType;
+    type -> RecordType;
+    type -> PointerType;
+    type -> ProcedureType;
+
+    ArrayType -> ARRAY;
+    ArrayType -> length;
+    ArrayType -> ",";
+    ArrayType -> OF;
+    ArrayType -> type;
+
+    length -> ConstExpression;
+
+    RecordType -> RECORD;
+    RecordType -> "(";
+    RecordType -> BaseType;
+    RecordType -> ")";
+    RecordType -> FieldListSequence;
+    RecordType -> END;
+
+    BaseType -> qualident;
+
+    FieldListSequence -> FieldList;
+    FieldListSequence -> ";";
+
+    FieldList -> IdentList;
+    FieldList -> ":";
+    FieldList -> type;
+
+    IdentList -> identdef;
+    IdentList -> ",";
+
+    PointerType -> POINTER;
+    PointerType -> TO;
+    PointerType -> type;
+
+    ProcedureType -> PROCEDURE;
+    ProcedureType -> FormalParameters;
+
+    VariableDeclaration -> IdentList;
+    VariableDeclaration -> ":";
+    VariableDeclaration -> type;
+}
+

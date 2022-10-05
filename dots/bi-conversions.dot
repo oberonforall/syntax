@@ -1,0 +1,6 @@
+digraph conversions {
+    "type conversion" -> "FLOOR(x)";
+    "type conversion" -> "FLT(x)";
+    "type conversion" -> "ORD(x)";
+    "type conversion" -> "CHR(x)";
+}

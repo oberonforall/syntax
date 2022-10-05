@@ -1,0 +1,16 @@
+digraph functions {
+    "function procedures" -> "ABS(x)";
+    "function procedures" -> "ODD(x)";
+    "function procedures" -> "LEN(v)";
+    "function procedures" -> "LSL(x, n)";
+    "function procedures" -> "ASR(x, n)";
+    "function procedures" -> "ROR(x, n)";
+    "function procedures" -> "SYSTEM.ADR(v)";
+    "function procedures" -> "SYSTEM.SIZE(T)";
+    "function procedures" -> "SYSTEM.BIT(a, n)";
+    "function procedures" -> "RISC.VAL(T, n)";
+    "function procedures" -> "RISC.ADC(m, n)";
+    "function procedures" -> "RISC.SBC(m, n)";
+    "function procedures" -> "RISC.UML(m, n)";
+    "function procedures" -> "RISC.COND(n)";
+}
