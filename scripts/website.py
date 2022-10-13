@@ -42,14 +42,17 @@ def get_keywords(syntax: Dict[str, Any]) -> List[str]:
     return sorted(list(set(keywords)))
 
 
+def generate_keywords(syntax: Dict[str, Any], website_path: str, template_path: str):
+    keywords = get_keywords(syntax)
+    pprint(keywords)
+
+
 def main(*, syntax_path: str, website_path: str, template_path: str):
     with open(syntax_path, "r") as syntax_file:
         syntax = json.load(syntax_file)["rules"]
 
     copy_index(website_path=website_path, template_path=template_path)
-
-    keywords = get_keywords(syntax)
-    pprint(keywords)
+    generate_keywords(syntax, website_path=website_path, template_path=template_path)
 
 
 if __name__ == "__main__":
