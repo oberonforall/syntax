@@ -1,9 +1,9 @@
 Name,Argument type,Function
-ASSERT,b: BOOLEAN,abort if ~b
-DEC,"v: INTEGER\nv, n: INTEGER",v := v - 1\nv := v - n
-EXCL,v: SET; x: INTEGER,v := v - {x}
-INC,"v: INTEGER\nv, n: INTEGER",v := v + 1\nv := v + n
-INCL,v: SET; x: INTEGER,v := v + {x}
-NEW,v: pointer type,allocate v^
-PACK,x: REAL; n: INTEGER,pack x and n into x
-UNPK,x: REAL; n: INTEGER,unpack x into x and n
+ASSERT,b: BOOLEAN,abort if <code>~b</code>
+DEC,"v: INTEGER\nv, n: INTEGER",<code>v := v - 1</code>\n<code>v := v - n</code>
+EXCL,v: SET; x: INTEGER,<code>v := v - {x}<code>
+INC,"v: INTEGER\nv, n: INTEGER",<code>v := v + 1</code>\n<code>v := v + n</code>
+INCL,v: SET; x: INTEGER,<code>v := v + {x}</code>
+NEW,v: pointer type,allocate <code>v^</code>
+PACK,x: REAL; n: INTEGER,pack <code>x</code> and <code>n</code> into <code>x</code>
+UNPK,x: REAL; n: INTEGER,unpack <code>x</code> into <code>x</code> and <code>n</code>

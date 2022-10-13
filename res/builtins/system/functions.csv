@@ -1,9 +1,9 @@
 Name,Argument type,Result type,Function
-SYSTEM.ADC,"m, n: INTEGER",INTEGER,add with carry C
-SYSTEM.ADR,v: any,INTEGER,address of variable v
-SYSTEM.BIT,"a, n: INTEGER",BOOLEAN,bit n of mem[a]
-SYSTEM.COND,n: INTEGER,BOOLEAN,IF Cond(n) THEN ...
-SYSTEM.SBC,"m, n: INTEGER",INTEGER,subtract with carry C
+SYSTEM.ADC,"m, n: INTEGER",INTEGER,add with carry <code>C</code>
+SYSTEM.ADR,v: any,INTEGER,address of variable <code>v</code>
+SYSTEM.BIT,"a, n: INTEGER",BOOLEAN,bit <code>n</code> of <code>mem[a]</code>
+SYSTEM.COND,n: INTEGER,BOOLEAN,<code>IF Cond(n) THEN ...</code>
+SYSTEM.SBC,"m, n: INTEGER",INTEGER,subtract with carry <code>C</code>
 SYSTEM.SIZE,T: any type,INTEGER,size in bytes
 SYSTEM.UML,"m, n: INTEGER",INTEGER,unsigned multiplication
 SYSTEM.VAL,"T, n: scalar",T,identity
