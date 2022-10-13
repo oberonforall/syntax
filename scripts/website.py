@@ -3,6 +3,7 @@
 from typing import Any, Dict, List
 import argparse
 
+from itertools import chain
 import csv
 import logging
 import os
@@ -157,10 +158,16 @@ def generate_builtins(website_path: str, template_path: str):
                 builtin_html = builtin_html.replace("{{PROCEDURE}}", name)
 
                 find = "{{DESCRIPTION}}"
+                description_tokens = description.split("\\n")
+                if "\\n" in description:
+                    brs = ["<br>"] * len(description_tokens)
+                    replace = list(chain.from_iterable(zip(description_tokens, brs)))[:-1]
+                else:
+                    replace = description_tokens
                 lines = multiline_find_replace(
                     builtin_html.split("\n"),
                     find=find,
-                    replace=description.split("\\n"),
+                    replace=replace,
                 )
                 assert lines is not None, f"There should be only one {find} in {src_file}!"
 
