@@ -44,16 +44,39 @@ def get_keywords(syntax: Dict[str, Any]) -> List[str]:
     return sorted(list(set(keywords)))
 
 
-def generate_keywords(keywords: List[str], website_path: str, template_path: str):
+def generate_keywords(keywords: List[str], back_references: Dict[str, List[str]], website_path: str, template_path: str):
     logging.info("Generating the keywords...")
 
     keywords_path = os.path.join(website_path, "keywords")
     os.makedirs(keywords_path, exist_ok=True)
 
+    place_holder = "{{REFERENCE}}"
+
     src_file = os.path.join(template_path, "keywords", "keyword.html")
     for keyword in keywords:
+        # copy the template file
         dst_file = os.path.join(keywords_path, f"{keyword}.html")
         shutil.copy(src_file, dst_file)
+
+        # read the copied template file
+        with open(dst_file, "r") as keyword_file:
+            keyword_html = keyword_file.read()
+            keyword_html = keyword_html.replace("{{KEYWORD}}", keyword)
+
+            # replace the back-references place-holders by their values
+            lines = keyword_html.split("\n")
+            indices = [i for i, line in enumerate(lines) if place_holder in line]
+            assert len(indices) == 1, f"There should be only one {place_holder} in {src_file}!"
+            index = indices[0]
+
+            for back_reference in back_references[keyword][::-1]:
+                line = lines[index].replace(place_holder, back_reference)
+                lines.insert(index + 1, line)
+            lines.pop(index)
+
+        # write the final file
+        with open(dst_file, "w") as keyword_file:
+            keyword_file.write("\n".join(lines))
 
 
 def generate_rules(rules: List[str], website_path: str, template_path: str):
@@ -152,9 +175,10 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
 
     keywords = get_keywords(syntax)
     rules = list(syntax.keys())
+    back_references = get_back_references(syntax)
 
     copy_index(website_path=website_path, template_path=template_path)
-    generate_keywords(keywords, website_path=website_path, template_path=template_path)
+    generate_keywords(keywords, back_references, website_path=website_path, template_path=template_path)
     generate_rules(rules, website_path=website_path, template_path=template_path)
     generate_builtins(website_path=website_path, template_path=template_path)
 
