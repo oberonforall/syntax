@@ -3,6 +3,7 @@
 from typing import Any, Dict, List
 import argparse
 
+import csv
 import logging
 import os
 import shutil
@@ -67,6 +68,53 @@ def generate_rules(rules: List[str], website_path: str, template_path: str):
         shutil.copy(src_file, dst_file)
 
 
+def generate_builtins(website_path: str, template_path: str):
+    logging.info("Generating the builtins...")
+
+    builtins_path = os.path.join(website_path, "builtins")
+    os.makedirs(builtins_path, exist_ok=True)
+
+    types = [
+        ("regular", "functions", "regular-function"),
+        ("regular", "procedures", "regular-procedure"),
+        ("system", "functions", "system-function"),
+        ("system", "procedures", "system-procedure")
+    ]
+    for top_dir, sub_dir, name in types:
+        src_file = os.path.join(
+            template_path,
+            "builtins",
+            top_dir,
+            sub_dir,
+            f"{name}.html"
+        )
+
+        builins_filename = os.path.join(
+            "res",
+            "builtins",
+            top_dir,
+            f"{sub_dir}.csv"
+        )
+        builtins = []
+        line_count = 0
+        with open(builins_filename, "r") as builtins_file:
+            builtins_csv = csv.reader(builtins_file, delimiter=',')
+            for row in builtins_csv:
+                if line_count >= 1:
+                    builtins.append(row[0])
+                line_count += 1
+
+        dst_dir = os.path.join(
+            builtins_path,
+            top_dir,
+            sub_dir
+        )
+        os.makedirs(dst_dir, exist_ok=True)
+        for builtin in builtins:
+            dst_file = os.path.join(dst_dir, f"{builtin}.html")
+            shutil.copy(src_file, dst_file)
+
+
 def get_back_references(syntax: Dict[str, Any]) -> Dict[str, List[str]]:
     def aux(syntax: Dict[str, Any]):
         rules = syntax["rules"]
@@ -108,6 +156,7 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
     copy_index(website_path=website_path, template_path=template_path)
     generate_keywords(keywords, website_path=website_path, template_path=template_path)
     generate_rules(rules, website_path=website_path, template_path=template_path)
+    generate_builtins(website_path=website_path, template_path=template_path)
 
 
 if __name__ == "__main__":
