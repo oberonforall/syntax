@@ -56,6 +56,18 @@ def generate_keywords(syntax: Dict[str, Any], website_path: str, template_path: 
         shutil.copy(src_file, dst_file)
 
 
+def generate_rules(syntax: Dict[str, Any], website_path: str, template_path: str):
+    logging.info("Generating the rules...")
+
+    rules_path = os.path.join(website_path, "rules")
+    os.makedirs(rules_path, exist_ok=True)
+
+    src_file = os.path.join(template_path, "rules", "rule.html")
+    for rule in syntax.keys():
+        dst_file = os.path.join(rules_path, f"{rule}.html")
+        shutil.copy(src_file, dst_file)
+
+
 def get_back_references(syntax: Dict[str, Any]) -> Dict[str, List[str]]:
     def aux(syntax: Dict[str, Any]):
         rules = syntax["rules"]
@@ -93,6 +105,7 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
 
     copy_index(website_path=website_path, template_path=template_path)
     generate_keywords(syntax, website_path=website_path, template_path=template_path)
+    generate_rules(syntax, website_path=website_path, template_path=template_path)
 
 
 if __name__ == "__main__":
