@@ -3,8 +3,18 @@
 from typing import Any, Dict, List
 import argparse
 
+import os
+import shutil
 import json
 from pprint import pprint
+
+
+def copy_index(website_path: str, template_path: str):
+    os.makedirs(website_path, exist_ok=True)
+
+    src_index = os.path.join(template_path, "index.html")
+    dst_index = os.path.join(website_path, "index.html")
+    shutil.copy(src_index, dst_index)
 
 
 def is_keyword(word: str) -> bool:
@@ -36,8 +46,9 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
     with open(syntax_path, "r") as syntax_file:
         syntax = json.load(syntax_file)["rules"]
 
-    keywords = get_keywords(syntax)
+    copy_index(website_path=website_path, template_path=template_path)
 
+    keywords = get_keywords(syntax)
     pprint(keywords)
 
 
