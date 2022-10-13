@@ -56,6 +56,37 @@ def generate_keywords(syntax: Dict[str, Any], website_path: str, template_path: 
         shutil.copy(src_file, dst_file)
 
 
+def get_back_references(syntax: Dict[str, Any]) -> Dict[str, List[str]]:
+    def aux(syntax: Dict[str, Any]):
+        rules = syntax["rules"]
+
+        references = []
+        for rule in rules:
+            if isinstance(rule, str):
+                references.append(rule)
+            elif isinstance(rule, Dict):
+                for reference in aux(rule):
+                    references.append(reference)
+
+        return references
+
+    references = {}
+    for key, value in syntax.items():
+        references[key] = aux(value)
+
+    back_references = {}
+    for key, value in references.items():
+        for reference in value:
+            if reference not in back_references:
+                back_references[reference] = []
+            back_references[reference].append(key)
+
+    for key, value in back_references.items():
+        back_references[key] = sorted(list(set(value)))
+
+    return back_references
+
+
 def main(*, syntax_path: str, website_path: str, template_path: str):
     with open(syntax_path, "r") as syntax_file:
         syntax = json.load(syntax_file)["rules"]
