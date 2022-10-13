@@ -1,0 +1,313 @@
+<html>
+    <head>
+        <title>Oberon Language's Syntax</title>
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <h4 class="sticky" style="top: 0;" align="right">
+            <a class="internal" href="../index.html">back to the homepage</a>
+        </h4>
+
+        <h1 align="center">The Syntax of the Oberon Programming Language</h1>
+        <p>
+            The full syntax and specification of the Oberon language can be found
+            in <a class="external" href="https://people.inf.ethz.ch/wirth/Oberon/Oberon07.Report.pdf">
+                <i>The Programming Language Oberon-07 (Revised Oberon)</i>
+            </a>
+        </p>
+
+        <p>
+            Below is an overview of the syntax rules, in several sections,
+            from the top rules to the most terminal ones.
+        </p>
+        <p>
+            At the very bottom of this page,
+            the user can find the lists of all the <var>syntax rules</var>
+            and the list of all the <code>KEYWORDS</code> defined by the
+            Oberon Programming language.
+        </p>
+
+        <h3 id="toc">Table of content:</h3>
+        <ol>
+            <li><a class="toc" href="#top-level"><i>Top level</i> rules</a></li>
+            <li><a class="toc" href="#procedures"><i>Procedure</i> rules</a></li>
+            <li><a class="toc" href="#control"><i>Control structures</i> rules</a></li>
+            <li><a class="toc" href="#expressions"><i>Expression</i> rules</a></li>
+            <li><a class="toc" href="#types"><i>Types</i> rules</a></li>
+            <li><a class="toc" href="#terminals"><i>Terminals</i></a></li>
+            <li><a class="toc" href="#all-rules">All the Oberon <var>syntax rules</var></a></li>
+            <li><a class="toc" href="#all-keywords">All the Oberon <code>KEYWORDS</code></a></li>
+            <li><a class="toc" href="#all-builtins">All the Oberon <i>built-in</i> procedures</a></li>
+            <ol>
+                <li><a class="toc" href="#regular-builtins">The regular <i>built-in</i> procedures</a></li>
+                <li><a class="toc" href="#system-builtins">The special <code>SYSTEM</code> <i>built-in</i> procedures</a></li>
+            </ol>
+        </ol>
+        <hr>
+        <hr>
+
+        <h3>Oberon production rules:</h3>
+
+        <h4 id="top-level"><td>
+                <div style="float: left; text-align: left"><i>Top level</i> rules:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="rule" href="rules/import.html"><var>import</var></a>
+            <a class="rule" href="rules/ImportList.html"><var>ImportList</var></a>
+            <a class="rule" href="rules/module.html"><var>module</var></a>
+        <hr>
+
+        <h4 id="procedures">
+                <div style="float: left; text-align: left"><i>Procedure</i> rules:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="rule" href="rules/DeclarationSequence.html"><var>DeclarationSequence</var></a>
+            <a class="rule" href="rules/FormalParameters.html"><var>FormalParameters</var></a>
+            <a class="rule" href="rules/FormalType.html"><var>FormalType</var></a>
+            <a class="rule" href="rules/FPSection.html"><var>FPSection</var></a>
+            <a class="rule" href="rules/ProcedureBody.html"><var>ProcedureBody</var></a>
+            <a class="rule" href="rules/ProcedureCall.html"><var>ProcedureCall</var></a>
+            <a class="rule" href="rules/ProcedureDeclaration.html"><var>ProcedureDeclaration</var></a>
+            <a class="rule" href="rules/ProcedureHeading.html"><var>ProcedureHeading</var></a>
+            <a class="rule" href="rules/ProcedureType.html"><var>ProcedureType</var></a>
+        <hr>
+
+        <h4 id="control">
+                <div style="float: left; text-align: left"><i>Control structures</i> rules:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="rule" href="rules/assignment.html"><var>assignment</var></a>
+            <a class="rule" href="rules/case.html"><var>case</var></a>
+            <a class="rule" href="rules/CaseLabelList.html"><var>CaseLabelList</var></a>
+            <a class="rule" href="rules/CaseStatement.html"><var>CaseStatement</var></a>
+            <a class="rule" href="rules/ForStatement.html"><var>ForStatement</var></a>
+            <a class="rule" href="rules/IfStatement.html"><var>IfStatement</var></a>
+            <a class="rule" href="rules/label.html"><var>label</var></a>
+            <a class="rule" href="rules/LabelRange.html"><var>LabelRange</var></a>
+            <a class="rule" href="rules/RepeatStatement.html"><var>RepeatStatement</var></a>
+            <a class="rule" href="rules/statement.html"><var>statement</var></a>
+            <a class="rule" href="rules/StatementSequence.html"><var>StatementSequence</var></a>
+            <a class="rule" href="rules/WhileStatement.html"><var>WhileStatement</var></a>
+        <hr>
+
+        <h4 id="expressions">
+                <div style="float: left; text-align: left"><i>Expression</i> rules:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="rule" href="rules/ActualParameters.html"><var>ActualParameters</var></a>
+            <a class="rule" href="rules/AddOperator.html"><var>AddOperator</var></a>
+            <a class="rule" href="rules/designator.html"><var>designator</var></a>
+            <a class="rule" href="rules/element.html"><var>element</var></a>
+            <a class="rule" href="rules/ExpList.html"><var>ExpList</var></a>
+            <a class="rule" href="rules/expression.html"><var>expression</var></a>
+            <a class="rule" href="rules/factor.html"><var>factor</var></a>
+            <a class="rule" href="rules/MulOperator.html"><var>MulOperator</var></a>
+            <a class="rule" href="rules/relation.html"><var>relation</var></a>
+            <a class="rule" href="rules/selector.html"><var>selector</var></a>
+            <a class="rule" href="rules/set.html"><var>set</var></a>
+            <a class="rule" href="rules/SimpleExpression.html"><var>SimpleExpression</var></a>
+            <a class="rule" href="rules/term.html"><var>term</var></a>
+        <hr>
+
+        <h4 id="types">
+                <div style="float: left; text-align: left"><i>Types</i> rules:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="rule" href="rules/ArrayType.html"><var>ArrayType</var></a>
+            <a class="rule" href="rules/BaseType.html"><var>BaseType</var></a>
+            <a class="rule" href="rules/FieldList.html"><var>FieldList</var></a>
+            <a class="rule" href="rules/FieldListSequence.html"><var>FieldListSequence</var></a>
+            <a class="rule" href="rules/IdentList.html"><var>IdentList</var></a>
+            <a class="rule" href="rules/length.html"><var>length</var></a>
+            <a class="rule" href="rules/PointerType.html"><var>PointerType</var></a>
+            <a class="rule" href="rules/ProcedureType.html"><var>ProcedureType</var></a>
+            <a class="rule" href="rules/RecordType.html"><var>RecordType</var></a>
+            <a class="rule" href="rules/type.html"><var>type</var></a>
+            <a class="rule" href="rules/TypeDeclaration.html"><var>TypeDeclaration</var></a>
+            <a class="rule" href="rules/VariableDeclaration.html"><var>VariableDeclaration</var></a>
+        <hr>
+
+        <h4 id="terminals">
+                <div style="float: left; text-align: left"><i>Terminals</i>:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="rule" href="rules/ConstDeclaration.html"><var>ConstDeclaration</var></a>
+            <a class="rule" href="rules/ConstExpression.html"><var>ConstExpression</var></a>
+            <a class="rule" href="rules/digit.html"><var>digit</var></a>
+            <a class="rule" href="rules/hexDigit.html"><var>hexDigit</var></a>
+            <a class="rule" href="rules/ident.html"><var>ident</var></a>
+            <a class="rule" href="rules/identdef.html"><var>identdef</var></a>
+            <a class="rule" href="rules/integer.html"><var>integer</var></a>
+            <a class="rule" href="rules/letter.html"><var>letter</var></a>
+            <a class="rule" href="rules/number.html"><var>number</var></a>
+            <a class="rule" href="rules/qualident.html"><var>qualident</var></a>
+            <a class="rule" href="rules/real.html"><var>real</var></a>
+            <a class="rule" href="rules/ScaleFactor.html"><var>ScaleFactor</var></a>
+            <a class="rule" href="rules/string.html"><var>string</var></a>
+        <hr>
+
+        <h3 id="all-rules">
+                <div style="float: left; text-align: left">All the Oberon <var>syntax rules</var>:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="rule" href="rules/ActualParameters.html"><var>ActualParameters</var></a>
+            <a class="rule" href="rules/AddOperator.html"><var>AddOperator</var></a>
+            <a class="rule" href="rules/ArrayType.html"><var>ArrayType</var></a>
+            <a class="rule" href="rules/assignment.html"><var>assignment</var></a>
+            <a class="rule" href="rules/BaseType.html"><var>BaseType</var></a>
+            <a class="rule" href="rules/case.html"><var>case</var></a>
+            <a class="rule" href="rules/CaseLabelList.html"><var>CaseLabelList</var></a>
+            <a class="rule" href="rules/CaseStatement.html"><var>CaseStatement</var></a>
+            <a class="rule" href="rules/ConstDeclaration.html"><var>ConstDeclaration</var></a>
+            <a class="rule" href="rules/ConstExpression.html"><var>ConstExpression</var></a>
+            <a class="rule" href="rules/DeclarationSequence.html"><var>DeclarationSequence</var></a>
+            <a class="rule" href="rules/designator.html"><var>designator</var></a>
+            <a class="rule" href="rules/digit.html"><var>digit</var></a>
+            <a class="rule" href="rules/element.html"><var>element</var></a>
+            <a class="rule" href="rules/ExpList.html"><var>ExpList</var></a>
+            <a class="rule" href="rules/expression.html"><var>expression</var></a>
+            <a class="rule" href="rules/factor.html"><var>factor</var></a>
+            <a class="rule" href="rules/FieldList.html"><var>FieldList</var></a>
+            <a class="rule" href="rules/FieldListSequence.html"><var>FieldListSequence</var></a>
+            <a class="rule" href="rules/FormalParameters.html"><var>FormalParameters</var></a>
+            <a class="rule" href="rules/FormalType.html"><var>FormalType</var></a>
+            <a class="rule" href="rules/ForStatement.html"><var>ForStatement</var></a>
+            <a class="rule" href="rules/FPSection.html"><var>FPSection</var></a>
+            <a class="rule" href="rules/hexDigit.html"><var>hexDigit</var></a>
+            <a class="rule" href="rules/ident.html"><var>ident</var></a>
+            <a class="rule" href="rules/identdef.html"><var>identdef</var></a>
+            <a class="rule" href="rules/IdentList.html"><var>IdentList</var></a>
+            <a class="rule" href="rules/IfStatement.html"><var>IfStatement</var></a>
+            <a class="rule" href="rules/import.html"><var>import</var></a>
+            <a class="rule" href="rules/ImportList.html"><var>ImportList</var></a>
+            <a class="rule" href="rules/integer.html"><var>integer</var></a>
+            <a class="rule" href="rules/label.html"><var>label</var></a>
+            <a class="rule" href="rules/LabelRange.html"><var>LabelRange</var></a>
+            <a class="rule" href="rules/length.html"><var>length</var></a>
+            <a class="rule" href="rules/letter.html"><var>letter</var></a>
+            <a class="rule" href="rules/module.html"><var>module</var></a>
+            <a class="rule" href="rules/MulOperator.html"><var>MulOperator</var></a>
+            <a class="rule" href="rules/number.html"><var>number</var></a>
+            <a class="rule" href="rules/PointerType.html"><var>PointerType</var></a>
+            <a class="rule" href="rules/ProcedureBody.html"><var>ProcedureBody</var></a>
+            <a class="rule" href="rules/ProcedureCall.html"><var>ProcedureCall</var></a>
+            <a class="rule" href="rules/ProcedureDeclaration.html"><var>ProcedureDeclaration</var></a>
+            <a class="rule" href="rules/ProcedureHeading.html"><var>ProcedureHeading</var></a>
+            <a class="rule" href="rules/ProcedureType.html"><var>ProcedureType</var></a>
+            <a class="rule" href="rules/qualident.html"><var>qualident</var></a>
+            <a class="rule" href="rules/real.html"><var>real</var></a>
+            <a class="rule" href="rules/RecordType.html"><var>RecordType</var></a>
+            <a class="rule" href="rules/relation.html"><var>relation</var></a>
+            <a class="rule" href="rules/RepeatStatement.html"><var>RepeatStatement</var></a>
+            <a class="rule" href="rules/ScaleFactor.html"><var>ScaleFactor</var></a>
+            <a class="rule" href="rules/selector.html"><var>selector</var></a>
+            <a class="rule" href="rules/set.html"><var>set</var></a>
+            <a class="rule" href="rules/SimpleExpression.html"><var>SimpleExpression</var></a>
+            <a class="rule" href="rules/statement.html"><var>statement</var></a>
+            <a class="rule" href="rules/StatementSequence.html"><var>StatementSequence</var></a>
+            <a class="rule" href="rules/string.html"><var>string</var></a>
+            <a class="rule" href="rules/term.html"><var>term</var></a>
+            <a class="rule" href="rules/type.html"><var>type</var></a>
+            <a class="rule" href="rules/TypeDeclaration.html"><var>TypeDeclaration</var></a>
+            <a class="rule" href="rules/VariableDeclaration.html"><var>VariableDeclaration</var></a>
+            <a class="rule" href="rules/WhileStatement.html"><var>WhileStatement</var></a>
+
+        <h3 id="all-keywords">
+                <div style="float: left; text-align: left">All the Oberon <code>KEYWORDS</code>:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h4>
+        <br><br>
+            <a class="keyword" href="keywords/ARRAY.html"><code>ARRAY</code></a>
+            <a class="keyword" href="keywords/BEGIN.html"><code>BEGIN</code></a>
+            <a class="keyword" href="keywords/BY.html"><code>BY</code></a>
+            <a class="keyword" href="keywords/CASE.html"><code>CASE</code></a>
+            <a class="keyword" href="keywords/CONST.html"><code>CONST</code></a>
+            <a class="keyword" href="keywords/DIV.html"><code>DIV</code></a>
+            <a class="keyword" href="keywords/DO.html"><code>DO</code></a>
+            <a class="keyword" href="keywords/ELSE.html"><code>ELSE</code></a>
+            <a class="keyword" href="keywords/ELSIF.html"><code>ELSIF</code></a>
+            <a class="keyword" href="keywords/END.html"><code>END</code></a>
+            <a class="keyword" href="keywords/FALSE.html"><code>FALSE</code></a>
+            <a class="keyword" href="keywords/FOR.html"><code>FOR</code></a>
+            <a class="keyword" href="keywords/IF.html"><code>IF</code></a>
+            <a class="keyword" href="keywords/IMPORT.html"><code>IMPORT</code></a>
+            <a class="keyword" href="keywords/IN.html"><code>IN</code></a>
+            <a class="keyword" href="keywords/IS.html"><code>IS</code></a>
+            <a class="keyword" href="keywords/MOD.html"><code>MOD</code></a>
+            <a class="keyword" href="keywords/MODULE.html"><code>MODULE</code></a>
+            <a class="keyword" href="keywords/NIL.html"><code>NIL</code></a>
+            <a class="keyword" href="keywords/OF.html"><code>OF</code></a>
+            <a class="keyword" href="keywords/OR.html"><code>OR</code></a>
+            <a class="keyword" href="keywords/POINTER.html"><code>POINTER</code></a>
+            <a class="keyword" href="keywords/PROCEDURE.html"><code>PROCEDURE</code></a>
+            <a class="keyword" href="keywords/RECORD.html"><code>RECORD</code></a>
+            <a class="keyword" href="keywords/REPEAT.html"><code>REPEAT</code></a>
+            <a class="keyword" href="keywords/RETURN.html"><code>RETURN</code></a>
+            <a class="keyword" href="keywords/THEN.html"><code>THEN</code></a>
+            <a class="keyword" href="keywords/TO.html"><code>TO</code></a>
+            <a class="keyword" href="keywords/TRUE.html"><code>TRUE</code></a>
+            <a class="keyword" href="keywords/TYPE.html"><code>TYPE</code></a>
+            <a class="keyword" href="keywords/UNTIL.html"><code>UNTIL</code></a>
+            <a class="keyword" href="keywords/VAR.html"><code>VAR</code></a>
+            <a class="keyword" href="keywords/WHILE.html"><code>WHILE</code></a>
+
+        <h3 id="all-builtins">
+                <div style="float: left; text-align: left">All the Oberon <i>built-in</i> procedures:</div>
+                <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+        </td></h3>
+        <br><br>
+            <h4 id="regular-builtins">
+                    <div style="float: left; text-align: left">The regular <i>built-in</i> procedures:</div>
+                    <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+            </td></h4>
+            <br><br>
+                function procedures:
+                <a class="function" href="builtins/regular/functions/ABS.html"><code>ABS</code></a>
+                <a class="function" href="builtins/regular/functions/ASR.html"><code>ASR</code></a>
+                <a class="function" href="builtins/regular/functions/CHR.html"><code>CHR</code></a>
+                <a class="function" href="builtins/regular/functions/FLOOR.html"><code>FLOOR</code></a>
+                <a class="function" href="builtins/regular/functions/FLT.html"><code>FLT</code></a>
+                <a class="function" href="builtins/regular/functions/LEN.html"><code>LEN</code></a>
+                <a class="function" href="builtins/regular/functions/LSL.html"><code>LSL</code></a>
+                <a class="function" href="builtins/regular/functions/ODD.html"><code>ODD</code></a>
+                <a class="function" href="builtins/regular/functions/ORD.html"><code>ORD</code></a>
+                <a class="function" href="builtins/regular/functions/ROR.html"><code>ROR</code></a>
+            <br>
+                proper procedures:
+                <a class="procedure" href="builtins/regular/procedures/ASSERT.html"><code>ASSERT</code></a>
+                <a class="procedure" href="builtins/regular/procedures/DEC.html"><code>DEC</code></a>
+                <a class="procedure" href="builtins/regular/procedures/EXCL.html"><code>EXCL</code></a>
+                <a class="procedure" href="builtins/regular/procedures/INC.html"><code>INC</code></a>
+                <a class="procedure" href="builtins/regular/procedures/INCL.html"><code>INCL</code></a>
+                <a class="procedure" href="builtins/regular/procedures/NEW.html"><code>NEW</code></a>
+                <a class="procedure" href="builtins/regular/procedures/PACK.html"><code>PACK</code></a>
+                <a class="procedure" href="builtins/regular/procedures/UNPK.html"><code>UNPK</code></a>
+            <h4 id="system-builtins">
+                    <div style="float: left; text-align: left">The special <code>SYSTEM</code> <i>built-in</i> procedures:</div>
+                    <div style="float: right; text-align: right"><a class="totoc" href="#toc">[TOC]</a></div>
+            </td></h4>
+            <br><br>
+                function procedures:
+                <a class="function" href="builtins/system/functions/SYSTEM.ADC.html"><code>SYSTEM.ADC</code></a>
+                <a class="function" href="builtins/system/functions/SYSTEM.ADR.html"><code>SYSTEM.ADR</code></a>
+                <a class="function" href="builtins/system/functions/SYSTEM.BIT.html"><code>SYSTEM.BIT</code></a>
+                <a class="function" href="builtins/system/functions/SYSTEM.COND.html"><code>SYSTEM.COND</code></a>
+                <a class="function" href="builtins/system/functions/SYSTEM.SBC.html"><code>SYSTEM.SBC</code></a>
+                <a class="function" href="builtins/system/functions/SYSTEM.SIZE.html"><code>SYSTEM.SIZE</code></a>
+                <a class="function" href="builtins/system/functions/SYSTEM.UML.html"><code>SYSTEM.UML</code></a>
+                <a class="function" href="builtins/system/functions/SYSTEM.VAL.html"><code>SYSTEM.VAL</code></a>
+            <br>
+                proper procedures:
+                <a class="procedure" href="builtins/system/procedures/SYSTEM.COPY.html"><code>SYSTEM.COPY</code></a>
+                <a class="procedure" href="builtins/system/procedures/SYSTEM.GET.html"><code>SYSTEM.GET</code></a>
+                <a class="procedure" href="builtins/system/procedures/SYSTEM.LED.html"><code>SYSTEM.LED</code></a>
+                <a class="procedure" href="builtins/system/procedures/SYSTEM.PUT.html"><code>SYSTEM.PUT</code></a>
+    </body>
+</html>
