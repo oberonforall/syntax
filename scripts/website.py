@@ -118,13 +118,13 @@ def generate_builtins(website_path: str, template_path: str):
             top_dir,
             f"{sub_dir}.csv"
         )
-        builtins = []
+        builtins_data = []
         line_count = 0
         with open(builins_filename, "r") as builtins_file:
             builtins_csv = csv.reader(builtins_file, delimiter=',')
             for row in builtins_csv:
                 if line_count >= 1:
-                    builtins.append(row[0])
+                    builtins_data.append(row)
                 line_count += 1
 
         dst_dir = os.path.join(
@@ -133,9 +133,33 @@ def generate_builtins(website_path: str, template_path: str):
             sub_dir
         )
         os.makedirs(dst_dir, exist_ok=True)
-        for builtin in builtins:
-            dst_file = os.path.join(dst_dir, f"{builtin}.html")
+        for name, *types, description in builtins_data:
+            # copy the template
+            dst_file = os.path.join(dst_dir, f"{name}.html")
             shutil.copy(src_file, dst_file)
+
+            # read the copied template file
+            with open(dst_file, "r") as builtin_file:
+                builtin_html = builtin_file.read()
+                builtin_html = builtin_html.replace("{{PROCEDURE}}", name)
+                builtin_html = builtin_html.replace("{{DESCRIPTION}}", description)
+
+                # replace the similar place-holders by their values
+                place_holder = "{{SIMILAR}}"
+                lines = builtin_html.split("\n")
+                indices = [i for i, line in enumerate(lines) if place_holder in line]
+                assert len(indices) == 1, f"There should be only one {place_holder} in {src_file}!"
+                index = indices[0]
+
+                for similar_name, *_ in builtins_data[::-1]:
+                    if similar_name != name:
+                        line = lines[index].replace(place_holder, similar_name)
+                        lines.insert(index + 1, line)
+                lines.pop(index)
+
+            # write the final file
+            with open(dst_file, "w") as builtin_file:
+                builtin_file.write("\n".join(lines))
 
 
 def get_back_references(syntax: Dict[str, Any]) -> Dict[str, List[str]]:
