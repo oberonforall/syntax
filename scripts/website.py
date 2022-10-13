@@ -7,7 +7,6 @@ import logging
 import os
 import shutil
 import json
-from pprint import pprint
 
 
 def copy_index(website_path: str, template_path: str):
@@ -45,8 +44,16 @@ def get_keywords(syntax: Dict[str, Any]) -> List[str]:
 
 
 def generate_keywords(syntax: Dict[str, Any], website_path: str, template_path: str):
+    logging.info("Generating the keywords...")
     keywords = get_keywords(syntax)
-    pprint(keywords)
+
+    keywords_path = os.path.join(website_path, "keywords")
+    os.makedirs(keywords_path, exist_ok=True)
+
+    src_file = os.path.join(template_path, "keywords", "keyword.html")
+    for keyword in keywords:
+        dst_file = os.path.join(keywords_path, f"{keyword}.html")
+        shutil.copy(src_file, dst_file)
 
 
 def main(*, syntax_path: str, website_path: str, template_path: str):
