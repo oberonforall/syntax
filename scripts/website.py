@@ -3,6 +3,7 @@
 from typing import Any, Dict, List
 import argparse
 
+import logging
 import os
 import shutil
 import json
@@ -10,6 +11,7 @@ from pprint import pprint
 
 
 def copy_index(website_path: str, template_path: str):
+    logging.info("Copying the index.html file...")
     os.makedirs(website_path, exist_ok=True)
 
     src_index = os.path.join(template_path, "index.html")
@@ -84,6 +86,11 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="[%(levelname)s] %(message)s"
+    )
 
     main(
         syntax_path=args.path,
