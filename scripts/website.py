@@ -171,6 +171,32 @@ def generate_builtins(website_path: str, template_path: str):
                 )
                 assert lines is not None, f"There should be only one {find} in {src_file}!"
 
+                find = "{{SIGNATURE}}"
+
+                if len(types) == 1:
+                    in_type = types
+                    signatures = [
+                        f"{name}({token});" for token in in_type[0].split("\\n")
+                    ]
+                elif len(types) == 2:
+                    in_type, out_type = types
+                    signatures = [
+                        f"{name}({in_token}): {out_token};" for in_token, out_token in zip(in_type.split("\\n"), [out_type])
+                    ]
+                else:
+                    raise ValueError("Two many input/output types, should only be 2.")
+                if "\\n" in description:
+                    brs = ["<br>"] * len(signatures)
+                    replace = list(chain.from_iterable(zip(signatures, brs)))[:-1]
+                else:
+                    replace = signatures
+                lines = multiline_find_replace(
+                    lines,
+                    find=find,
+                    replace=replace,
+                )
+                assert lines is not None, f"There should be only one {find} in {src_file}!"
+
                 find = "{{SIMILAR}}"
                 lines = multiline_find_replace(
                     lines,
