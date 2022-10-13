@@ -33,8 +33,7 @@ def get_keywords(syntax: Dict[str, Any]) -> List[str]:
                 if is_keyword(rule):
                     keywords.append(rule)
             elif isinstance(rule, Dict):
-                for keyword in aux(rule):
-                    keywords.append(keyword)
+                keywords += aux(rule)
 
         return keywords
 
