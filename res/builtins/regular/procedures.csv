@@ -1,10 +1,8 @@
 Name,Argument type,Function
 ASSERT,b: BOOLEAN,abort if ~b
-DEC,v: INTEGER,v := v - 1
-DEC,"v, n: INTEGER",v := v - n
+DEC,"v: INTEGER\nv, n: INTEGER",v:= v - 1\nv := v - n
 EXCL,v: SET; x: INTEGER,v := v - {x}
-INC,v: INTEGER,v := v + 1
-INC,"v, n: INTEGER",v := v + n
+INC,"v: INTEGER\nv, n: INTEGER",v:= v + 1\nv := v + n
 INCL,v: SET; x: INTEGER,v := v + {x}
 NEW,v: pointer type,allocate v^
 PACK,x: REAL; n: INTEGER,pack x and n into x
