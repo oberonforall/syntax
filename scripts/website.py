@@ -43,9 +43,8 @@ def get_keywords(syntax: Dict[str, Any]) -> List[str]:
     return sorted(list(set(keywords)))
 
 
-def generate_keywords(syntax: Dict[str, Any], website_path: str, template_path: str):
+def generate_keywords(keywords: List[str], website_path: str, template_path: str):
     logging.info("Generating the keywords...")
-    keywords = get_keywords(syntax)
 
     keywords_path = os.path.join(website_path, "keywords")
     os.makedirs(keywords_path, exist_ok=True)
@@ -56,14 +55,14 @@ def generate_keywords(syntax: Dict[str, Any], website_path: str, template_path: 
         shutil.copy(src_file, dst_file)
 
 
-def generate_rules(syntax: Dict[str, Any], website_path: str, template_path: str):
+def generate_rules(rules: List[str], website_path: str, template_path: str):
     logging.info("Generating the rules...")
 
     rules_path = os.path.join(website_path, "rules")
     os.makedirs(rules_path, exist_ok=True)
 
     src_file = os.path.join(template_path, "rules", "rule.html")
-    for rule in syntax.keys():
+    for rule in rules:
         dst_file = os.path.join(rules_path, f"{rule}.html")
         shutil.copy(src_file, dst_file)
 
@@ -103,9 +102,12 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
     with open(syntax_path, "r") as syntax_file:
         syntax = json.load(syntax_file)["rules"]
 
+    keywords = get_keywords(syntax)
+    rules = list(syntax.keys())
+
     copy_index(website_path=website_path, template_path=template_path)
-    generate_keywords(syntax, website_path=website_path, template_path=template_path)
-    generate_rules(syntax, website_path=website_path, template_path=template_path)
+    generate_keywords(keywords, website_path=website_path, template_path=template_path)
+    generate_rules(rules, website_path=website_path, template_path=template_path)
 
 
 if __name__ == "__main__":
