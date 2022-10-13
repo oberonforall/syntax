@@ -23,6 +23,25 @@ def is_keyword(word: str) -> bool:
     return len(word) >= 2 and word.isupper()
 
 
+def multiline_find_replace(
+    lines: List[str],
+    find: str,
+    replace: List[str]
+) -> List[str]:
+    indices = [i for i, line in enumerate(lines) if find in line]
+    if len(indices) != 1:
+        return None
+
+    index = indices[0]
+
+    for repl in replace[::-1]:
+        line = lines[index].replace(find, repl)
+        lines.insert(index + 1, line)
+    lines.pop(index)
+
+    return lines
+
+
 def get_keywords(syntax: Dict[str, Any]) -> List[str]:
     def aux(syntax: Dict[str, Any]):
         rules = syntax["rules"]
@@ -49,8 +68,6 @@ def generate_keywords(keywords: List[str], back_references: Dict[str, List[str]]
     keywords_path = os.path.join(website_path, "keywords")
     os.makedirs(keywords_path, exist_ok=True)
 
-    place_holder = "{{REFERENCE}}"
-
     src_file = os.path.join(template_path, "keywords", "keyword.html")
     for keyword in keywords:
         # copy the template file
@@ -62,16 +79,13 @@ def generate_keywords(keywords: List[str], back_references: Dict[str, List[str]]
             keyword_html = keyword_file.read()
             keyword_html = keyword_html.replace("{{KEYWORD}}", keyword)
 
-            # replace the back-references place-holders by their values
-            lines = keyword_html.split("\n")
-            indices = [i for i, line in enumerate(lines) if place_holder in line]
-            assert len(indices) == 1, f"There should be only one {place_holder} in {src_file}!"
-            index = indices[0]
-
-            for back_reference in back_references[keyword][::-1]:
-                line = lines[index].replace(place_holder, back_reference)
-                lines.insert(index + 1, line)
-            lines.pop(index)
+            find = "{{REFERENCE}}"
+            lines = multiline_find_replace(
+                keyword_html.split("\n"),
+                find=find,
+                replace=back_references[keyword],
+            )
+            assert lines is not None, f"There should be only one {find} in {src_file}!"
 
         # write the final file
         with open(dst_file, "w") as keyword_file:
@@ -141,20 +155,22 @@ def generate_builtins(website_path: str, template_path: str):
             with open(dst_file, "r") as builtin_file:
                 builtin_html = builtin_file.read()
                 builtin_html = builtin_html.replace("{{PROCEDURE}}", name)
-                builtin_html = builtin_html.replace("{{DESCRIPTION}}", description)
 
-                # replace the similar place-holders by their values
-                place_holder = "{{SIMILAR}}"
-                lines = builtin_html.split("\n")
-                indices = [i for i, line in enumerate(lines) if place_holder in line]
-                assert len(indices) == 1, f"There should be only one {place_holder} in {src_file}!"
-                index = indices[0]
+                find = "{{DESCRIPTION}}"
+                lines = multiline_find_replace(
+                    builtin_html.split("\n"),
+                    find=find,
+                    replace=description.split("\\n"),
+                )
+                assert lines is not None, f"There should be only one {find} in {src_file}!"
 
-                for similar_name, *_ in builtins_data[::-1]:
-                    if similar_name != name:
-                        line = lines[index].replace(place_holder, similar_name)
-                        lines.insert(index + 1, line)
-                lines.pop(index)
+                find = "{{SIMILAR}}"
+                lines = multiline_find_replace(
+                    lines,
+                    find=find,
+                    replace=[similar_name for similar_name, *_ in builtins_data if similar_name != name],
+                )
+                assert lines is not None, f"There should be only one {find} in {src_file}!"
 
             # write the final file
             with open(dst_file, "w") as builtin_file:
