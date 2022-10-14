@@ -239,6 +239,7 @@ def get_back_references(syntax: Dict[str, Any]) -> Dict[str, List[str]]:
 
     back_references = {}
     for key, value in references.items():
+        back_references[key] = []
         for reference in value:
             if reference not in back_references:
                 back_references[reference] = []
