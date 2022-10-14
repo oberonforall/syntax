@@ -93,11 +93,43 @@ def generate_keywords(keywords: List[str], back_references: Dict[str, List[str]]
             keyword_file.write("\n".join(lines))
 
 
-def generate_rules(rules: List[str], back_references: Dict[str, List[str]], website_path: str, template_path: str):
+def generate_rules(rules: List[str], syntax: Dict[str, Any], back_references: Dict[str, List[str]], website_path: str, template_path: str):
     logging.info("Generating the rules...")
 
     rules_path = os.path.join(website_path, "rules")
     os.makedirs(rules_path, exist_ok=True)
+
+    def aux(syntax: Dict[str, Any], tokens: List[str]) -> List[str]:
+        rules = syntax["rules"]
+        production = syntax["production"]
+
+        produced_rules = []
+        for rule in rules:
+            if isinstance(rule, str):
+                if is_keyword(rule):
+                    produced_rule = f"<a class=\"keyword\" href=\"../keywords/{rule}.html\"<code>{rule}</code></a>"
+                elif rule in tokens:
+                    produced_rule = f"<a class=\"rule\" href=\"{rule}.html\">{rule}</a>"
+                else:
+                    produced_rule = f"<font class=\"character\">\"{rule}\"</font>"
+                produced_rules.append(produced_rule)
+            elif isinstance(rule, Dict):
+                produced_rules.append(aux(rule, tokens=tokens))
+
+        if production == "or":
+            produced_rule = " | ".join(produced_rules)
+        elif production == "any":
+            inner = " ".join(produced_rules)
+            produced_rule = "{%s}" % inner
+        elif production == "opt":
+            inner = " ".join(produced_rules)
+            produced_rule = f"[{inner}]"
+        elif production == "seq":
+            produced_rule = " ".join(produced_rules)
+        else:
+            raise ValueError(f"Unknown production rule '{production}'")
+
+        return produced_rule
 
     src_file = os.path.join(template_path, "rules", "rule.html")
     for rule in rules:
@@ -109,9 +141,18 @@ def generate_rules(rules: List[str], back_references: Dict[str, List[str]], webs
             rule_html = rule_file.read()
             rule_html = rule_html.replace("{{RULE}}", rule)
 
-            find = "{{REFERENCE}}"
+            find = "{{PRODUCTION}}"
+            produced_rule = [aux(syntax[rule], rules)]
             lines = multiline_find_replace(
                 rule_html.split("\n"),
+                find=find,
+                replace=produced_rule,
+            )
+            assert lines is not None, f"There should be only one {find} in {src_file}!"
+
+            find = "{{REFERENCE}}"
+            lines = multiline_find_replace(
+                lines,
                 find=find,
                 replace=back_references[rule],
             )
@@ -278,7 +319,7 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
 
     copy_index(website_path=website_path, template_path=template_path)
     generate_keywords(keywords, back_references, website_path=website_path, template_path=template_path)
-    generate_rules(rules, back_references, website_path=website_path, template_path=template_path)
+    generate_rules(rules, syntax, back_references, website_path=website_path, template_path=template_path)
     generate_builtins(website_path=website_path, template_path=template_path)
 
 
