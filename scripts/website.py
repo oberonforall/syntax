@@ -93,7 +93,7 @@ def generate_keywords(keywords: List[str], back_references: Dict[str, List[str]]
             keyword_file.write("\n".join(lines))
 
 
-def generate_rules(rules: List[str], website_path: str, template_path: str):
+def generate_rules(rules: List[str], back_references: Dict[str, List[str]], website_path: str, template_path: str):
     logging.info("Generating the rules...")
 
     rules_path = os.path.join(website_path, "rules")
@@ -103,6 +103,23 @@ def generate_rules(rules: List[str], website_path: str, template_path: str):
     for rule in rules:
         dst_file = os.path.join(rules_path, f"{rule}.html")
         shutil.copy(src_file, dst_file)
+
+        # read the copied template file
+        with open(dst_file, "r") as rule_file:
+            rule_html = rule_file.read()
+            rule_html = rule_html.replace("{{RULE}}", rule)
+
+            find = "{{REFERENCE}}"
+            lines = multiline_find_replace(
+                rule_html.split("\n"),
+                find=find,
+                replace=back_references[rule],
+            )
+            assert lines is not None, f"There should be only one {find} in {src_file}!"
+
+        # write the final file
+        with open(dst_file, "w") as rule_file:
+            rule_file.write("\n".join(lines))
 
 
 def generate_builtins(website_path: str, template_path: str):
@@ -261,7 +278,7 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
 
     copy_index(website_path=website_path, template_path=template_path)
     generate_keywords(keywords, back_references, website_path=website_path, template_path=template_path)
-    generate_rules(rules, website_path=website_path, template_path=template_path)
+    generate_rules(rules, back_references, website_path=website_path, template_path=template_path)
     generate_builtins(website_path=website_path, template_path=template_path)
 
 
