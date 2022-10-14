@@ -164,6 +164,15 @@ def generate_builtins(website_path: str, template_path: str):
                     replace = list(chain.from_iterable(zip(description_tokens, brs)))[:-1]
                 else:
                     replace = description_tokens
+                # this snippet replace the "` `" pairs with "<code> </code>" pairs
+                done = False
+                while not done:
+                    html_replace = [repl.replace("`", "<code>", 1) for repl in replace]
+                    html_replace = [repl.replace("`", "</code>", 1) for repl in html_replace]
+                    if html_replace == replace:
+                        done = True
+                    replace = html_replace
+                # apply multiline find and replace with the formatted description
                 lines = multiline_find_replace(
                     builtin_html.split("\n"),
                     find=find,
