@@ -12,6 +12,7 @@ nushell> ./scripts/generate-language | from json | save language.json
 ```bash
 > ./script/generate-website
 ```
+you might want to add `style.css` at the root of the repo, i.e. next to `./website/`, in order to style the generated website pages.
 
 ### Clean the repo
 ```bash
