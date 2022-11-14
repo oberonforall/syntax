@@ -163,7 +163,7 @@ def generate_rules(rules: List[str], syntax: Dict[str, Any], back_references: Di
             rule_file.write("\n".join(lines))
 
 
-def generate_builtins(website_path: str, template_path: str):
+def generate_builtins(builtins: Dict[str, Any], website_path: str, template_path: str):
     logging.info("Generating the builtins...")
 
     builtins_path = os.path.join(website_path, "builtins")
@@ -317,6 +317,7 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
         data = json.load(syntax_file)
 
     rules = data["syntax"]["rules"]
+    builtins = data["builtins"]
 
     keywords = get_keywords(rules)
     rule_names = list(rules.keys())
@@ -325,7 +326,7 @@ def main(*, syntax_path: str, website_path: str, template_path: str):
     copy_index(website_path=website_path, template_path=template_path)
     generate_keywords(keywords, back_references, website_path=website_path, template_path=template_path)
     generate_rules(rule_names, rules, back_references, website_path=website_path, template_path=template_path)
-    generate_builtins(website_path=website_path, template_path=template_path)
+    generate_builtins(builtins, website_path=website_path, template_path=template_path)
 
 
 if __name__ == "__main__":
