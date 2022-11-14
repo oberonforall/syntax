@@ -345,7 +345,7 @@ if __name__ == "__main__":
         default=default,
         help=f"the path to the generated HTML website files (defaults to {default}).",
     )
-    default = "res/html/templates"
+    default = "html/templates"
     parser.add_argument(
         "--templates",
         "-t",
