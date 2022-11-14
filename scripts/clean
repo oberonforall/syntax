@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+RM="rm --verbose"
+
+[ -f .generated.txt ] && $RM .generated.txt
+[ -f .syntax.json ] && $RM .syntax.json
+[ -f ebnf.txt ] && $RM ebnf.txt
+[ -f language.json ] && $RM language.json
+
+[ -d website/ ] && {
+  echo "removing 'website/'"
+  rm --recursive website/
+}
