@@ -67,7 +67,7 @@ if __name__ == "__main__":
         "-p",
         type=str,
         default=default,
-        help=f"the path to the syntax file (defaults to {default}).",
+        help=f"the path to the language file (defaults to {default}).",
     )
     parser.add_argument(
         "--rules",
