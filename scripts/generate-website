@@ -184,20 +184,11 @@ def generate_builtins(builtins: Dict[str, Any], website_path: str, template_path
             f"{name}.html"
         )
 
-        builins_filename = os.path.join(
-            "res",
-            "builtins",
-            top_dir,
-            f"{sub_dir}.csv"
-        )
-        builtins_data = []
-        line_count = 0
-        with open(builins_filename, "r") as builtins_file:
-            builtins_csv = csv.reader(builtins_file, delimiter=',')
-            for row in builtins_csv:
-                if line_count >= 1:
-                    builtins_data.append(row)
-                line_count += 1
+        builtins_data = [
+            [row["Name"], row["Argument type"], row["Function"]] if len(row.keys()) == 3
+            else [row["Name"], row["Argument type"], row["Result type"], row["Function"]]
+            for row in builtins[top_dir][sub_dir]
+        ]
 
         dst_dir = os.path.join(
             builtins_path,
