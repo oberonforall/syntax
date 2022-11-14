@@ -314,15 +314,17 @@ def get_back_references(syntax: Dict[str, Any]) -> Dict[str, List[str]]:
 
 def main(*, syntax_path: str, website_path: str, template_path: str):
     with open(syntax_path, "r") as syntax_file:
-        syntax = json.load(syntax_file)["syntax"]["rules"]
+        data = json.load(syntax_file)
 
-    keywords = get_keywords(syntax)
-    rules = list(syntax.keys())
-    back_references = get_back_references(syntax)
+    rules = data["syntax"]["rules"]
+
+    keywords = get_keywords(rules)
+    rule_names = list(rules.keys())
+    back_references = get_back_references(rules)
 
     copy_index(website_path=website_path, template_path=template_path)
     generate_keywords(keywords, back_references, website_path=website_path, template_path=template_path)
-    generate_rules(rules, syntax, back_references, website_path=website_path, template_path=template_path)
+    generate_rules(rule_names, rules, back_references, website_path=website_path, template_path=template_path)
     generate_builtins(website_path=website_path, template_path=template_path)
 
 
