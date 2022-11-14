@@ -4,7 +4,6 @@ from typing import Any, Dict, List
 import argparse
 
 from itertools import chain
-import csv
 import logging
 import os
 import shutil
@@ -175,13 +174,13 @@ def generate_builtins(builtins: Dict[str, Any], website_path: str, template_path
         ("system", "functions", "system-function"),
         ("system", "procedures", "system-procedure")
     ]
-    for top_dir, sub_dir, name in types:
+    for top_dir, sub_dir, html_name in types:
         src_file = os.path.join(
             template_path,
             "builtins",
             top_dir,
             sub_dir,
-            f"{name}.html"
+            f"{html_name}.html"
         )
 
         builtins_data = [
