@@ -956,10 +956,67 @@ let rules = {
    }
 }
 
+let system_functions = [
+    [Name        "Argument type" "Result type" Function];
+    [SYSTEM.ADC  "m, n: INTEGER" INTEGER       "add with carry `C`"]
+    [SYSTEM.ADR  "v: any"        INTEGER       "address of variable `v`"]
+    [SYSTEM.BIT  "a, n: INTEGER" BOOLEAN       "bit `n` of `mem[a]`"]
+    [SYSTEM.COND "n: INTEGER"    BOOLEAN       "`IF Cond(n) THEN ...`"]
+    [SYSTEM.SBC  "m, n: INTEGER" INTEGER       "subtract with carry `C`"]
+    [SYSTEM.SIZE "T: any type"   INTEGER       "size in bytes"]
+    [SYSTEM.UML  "m, n: INTEGER" INTEGER       "unsigned multiplication"]
+    [SYSTEM.VAL  "T, n: scalar"  T             identity]
+]
+
+let system_procedures = [
+    [Name        "Argument type"                 Function];
+    [SYSTEM.COPY "src, dst, n: INTEGER"          "copy `n` consecutive words from `src` to `dst`"]
+    [SYSTEM.GET  "a: INTEGER; v: any basic type" "`v := mem[a]`"]
+    [SYSTEM.LED  "n: INTEGER"                    "display `n` on LEDs"]
+    [SYSTEM.PUT  "a: INTEGER; x: any basic type" "`mem[a] := x`"]
+]
+ 
+let regular_functions = [
+    [Name  "Argument type"         "Result type" Function];
+    [ABS   "x: numeric type"       "type of x"   "absolute value"]
+    [ASR   "x, n: INTEGER"         INTEGER       "signed shift right, `x DIV 2`"]
+    [CHR   "x: INTEGER"            CHAR          "character with ordinal number `x`"]
+    [FLOOR "x: REAL"               INTEGER       "round down"]
+    [FLT   "x: INTEGER"            REAL          identity]
+    [LEN   "v: array"              INTEGER       "the length of `v`"]
+    [LSL   "x, n: INTEGER"         INTEGER       "logical shift left, `x * 2^n`"]
+    [ODD   "x: INTEGER"            BOOLEAN       "`x MOD 2 = 1`"]
+    [ORD   "x: CHAR, BOOLEAN, SET" INTEGER       "ordinal number of `x`"]
+    [ROR   "x, n: INTEGER"         INTEGER       "`x` rotated right by `n` bits"]
+]
+ 
+let regular_procedures = [
+    [Name   "Argument type"              Function];
+    [ASSERT "b: BOOLEAN"                 "abort if `~b`"]
+    [DEC    "v: INTEGER\\nv, n: INTEGER" "`v := v - 1`\\n`v := v - n`"]
+    [EXCL   "v: SET; x: INTEGER"         "`v := v - {x}`"]
+    [INC    "v: INTEGER\\nv, n: INTEGER" "`v := v + 1`\\n`v := v + n`"]
+    [INCL   "v: SET; x: INTEGER"         "`v := v + {x}`"]
+    [NEW    "v: pointer type"            "allocate `v^`"]
+    [PACK   "x: REAL; n: INTEGER"        "pack `x` and `n` into `x`"]
+    [UNPK   "x: REAL; n: INTEGER"        "unpack `x` into `x` and `n`"]
+]
+
 let language = {
     "syntax": {
         "rules": $rules
     }
+    "builtins" : {
+        "regular": {
+            "functions": $regular_functions
+            "procedures": $regular_procedures
+        }
+        "system": {
+            "functions": $system_functions
+            "procedures": $system_procedures
+        }
+    }
+
 }
 
 $language | to json
