@@ -1,9 +1,0 @@
-Name,Argument type,Function
-ASSERT,b: BOOLEAN,abort if `~b`
-DEC,"v: INTEGER\nv, n: INTEGER",`v := v - 1`\n`v := v - n`
-EXCL,v: SET; x: INTEGER,`v := v - {x}`
-INC,"v: INTEGER\nv, n: INTEGER",`v := v + 1`\n`v := v + n`
-INCL,v: SET; x: INTEGER,`v := v + {x}`
-NEW,v: pointer type,allocate `v^`
-PACK,x: REAL; n: INTEGER,pack `x` and `n` into `x`
-UNPK,x: REAL; n: INTEGER,unpack `x` into `x` and `n`

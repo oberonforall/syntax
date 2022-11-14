@@ -4,7 +4,6 @@ from typing import Any, Dict, List
 import argparse
 
 from itertools import chain
-import csv
 import logging
 import os
 import shutil
@@ -163,7 +162,7 @@ def generate_rules(rules: List[str], syntax: Dict[str, Any], back_references: Di
             rule_file.write("\n".join(lines))
 
 
-def generate_builtins(website_path: str, template_path: str):
+def generate_builtins(builtins: Dict[str, Any], website_path: str, template_path: str):
     logging.info("Generating the builtins...")
 
     builtins_path = os.path.join(website_path, "builtins")
@@ -175,29 +174,20 @@ def generate_builtins(website_path: str, template_path: str):
         ("system", "functions", "system-function"),
         ("system", "procedures", "system-procedure")
     ]
-    for top_dir, sub_dir, name in types:
+    for top_dir, sub_dir, html_name in types:
         src_file = os.path.join(
             template_path,
             "builtins",
             top_dir,
             sub_dir,
-            f"{name}.html"
+            f"{html_name}.html"
         )
 
-        builins_filename = os.path.join(
-            "res",
-            "builtins",
-            top_dir,
-            f"{sub_dir}.csv"
-        )
-        builtins_data = []
-        line_count = 0
-        with open(builins_filename, "r") as builtins_file:
-            builtins_csv = csv.reader(builtins_file, delimiter=',')
-            for row in builtins_csv:
-                if line_count >= 1:
-                    builtins_data.append(row)
-                line_count += 1
+        builtins_data = [
+            [row["Name"], row["Argument type"], row["Function"]] if len(row.keys()) == 3
+            else [row["Name"], row["Argument type"], row["Result type"], row["Function"]]
+            for row in builtins[top_dir][sub_dir]
+        ]
 
         dst_dir = os.path.join(
             builtins_path,
@@ -314,28 +304,31 @@ def get_back_references(syntax: Dict[str, Any]) -> Dict[str, List[str]]:
 
 def main(*, syntax_path: str, website_path: str, template_path: str):
     with open(syntax_path, "r") as syntax_file:
-        syntax = json.load(syntax_file)["rules"]
+        data = json.load(syntax_file)
 
-    keywords = get_keywords(syntax)
-    rules = list(syntax.keys())
-    back_references = get_back_references(syntax)
+    rules = data["syntax"]["rules"]
+    builtins = data["builtins"]
+
+    keywords = get_keywords(rules)
+    rule_names = list(rules.keys())
+    back_references = get_back_references(rules)
 
     copy_index(website_path=website_path, template_path=template_path)
     generate_keywords(keywords, back_references, website_path=website_path, template_path=template_path)
-    generate_rules(rules, syntax, back_references, website_path=website_path, template_path=template_path)
-    generate_builtins(website_path=website_path, template_path=template_path)
+    generate_rules(rule_names, rules, back_references, website_path=website_path, template_path=template_path)
+    generate_builtins(builtins, website_path=website_path, template_path=template_path)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    default = "syntax.json"
+    default = "language.json"
     parser.add_argument(
         "--path",
         "-p",
         type=str,
         default=default,
-        help=f"the path to the syntax file (defaults to {default}).",
+        help=f"the path to the language file (defaults to {default}).",
     )
     default = "website"
     parser.add_argument(
@@ -345,7 +338,7 @@ if __name__ == "__main__":
         default=default,
         help=f"the path to the generated HTML website files (defaults to {default}).",
     )
-    default = "res/html/templates"
+    default = "html/templates"
     parser.add_argument(
         "--templates",
         "-t",
