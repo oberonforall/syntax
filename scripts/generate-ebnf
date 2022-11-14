@@ -43,16 +43,18 @@ def generate_rule(name: str, *, syntax: Dict[str, Any], tokens: List[str]) -> st
 
 def main(*, syntax_path: str, rule_names: List[str], generate_all: bool):
     with open(syntax_path, "r") as syntax_file:
-        syntax = json.load(syntax_file)["syntax"]["rules"]
+        data = json.load(syntax_file)
 
-    syntax_tokens = list(syntax.keys())
+    rules = data["syntax"]["rules"]
+
+    tokens = list(rules.keys())
 
     if generate_all:
-        rule_names = sorted(syntax_tokens)
+        rule_names = sorted(tokens)
 
     for rule_name in rule_names:
-        if rule_name in syntax_tokens:
-            rule = generate_rule(rule_name, syntax=syntax[rule_name], tokens=syntax_tokens)
+        if rule_name in tokens:
+            rule = generate_rule(rule_name, syntax=rules[rule_name], tokens=tokens)
             print(f"{rule_name} = {rule}")
         else:
             print(f"'{rule_name}' is not a valid token for syntax at '{syntax_path}")
