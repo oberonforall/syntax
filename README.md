@@ -5,7 +5,7 @@ A collection of resources and scripts to work on and play with the minimal synta
 ## Use the repo
 ### Generate the language file
 ```bash
-nushell> ./scripts/generate-language | from json | save syntax.json
+nushell> ./scripts/generate-language | from json | save language.json
 ```
 
 ### Generate the static website pages
