@@ -1,0 +1,1706 @@
+{
+  "syntax":
+  {
+    "rules":
+    {
+      "letter":
+      {
+        "rules":
+        [
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f",
+          "g",
+          "h",
+          "i",
+          "j",
+          "k",
+          "l",
+          "m",
+          "n",
+          "o",
+          "p",
+          "q",
+          "r",
+          "s",
+          "t",
+          "u",
+          "v",
+          "w",
+          "x",
+          "y",
+          "z",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X",
+          "Y",
+          "Z"
+        ],
+        "production": "or"
+      },
+      "digit":
+      {
+        "rules":
+        [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "production": "or"
+      },
+      "hexDigit":
+      {
+        "rules":
+        [
+          "digit",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "production": "or"
+      },
+      "ident":
+      {
+        "rules":
+        [
+          "letter",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "letter",
+                  "digit"
+                ],
+                "production": "or"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "qualident":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "ident",
+                  "."
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          "ident"
+        ],
+        "production": "seq"
+      },
+      "identdef":
+      {
+        "rules":
+        [
+          "ident",
+          {
+            "rules":
+            [
+              "*"
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "integer":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              "digit",
+              {
+                "rules":
+                [
+                  "digit"
+                ],
+                "production": "any"
+              }
+            ],
+            "production": "seq"
+          },
+          {
+            "rules":
+            [
+              "digit",
+              {
+                "rules":
+                [
+                  "hexDigit"
+                ],
+                "production": "any"
+              },
+              "H"
+            ],
+            "production": "seq"
+          }
+        ],
+        "production": "or"
+      },
+      "real":
+      {
+        "rules":
+        [
+          "digit",
+          {
+            "rules":
+            [
+              "digit"
+            ],
+            "production": "any"
+          },
+          ".",
+          {
+            "rules":
+            [
+              "digit"
+            ],
+            "production": "any"
+          },
+          {
+            "rules":
+            [
+              "ScaleFactor"
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "ScaleFactor":
+      {
+        "rules":
+        [
+          "E",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "+",
+                  "-"
+                ],
+                "production": "or"
+              }
+            ],
+            "production": "opt"
+          },
+          "digit",
+          {
+            "rules":
+            [
+              "digit"
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "number":
+      {
+        "rules":
+        [
+          "integer",
+          "real"
+        ],
+        "production": "or"
+      },
+      "ASCIIWhitespace":
+      {
+        "rules":
+        [
+          "0x00",
+          "0x01",
+          "0x02",
+          "0x03",
+          "0x04",
+          "0x05",
+          "0x06",
+          "0x07",
+          "0x08",
+          "0x09",
+          "0x0A",
+          "0x0B",
+          "0x0C",
+          "0x0D",
+          "0x0E",
+          "0x0F",
+          "0x10",
+          "0x11",
+          "0x12",
+          "0x13",
+          "0x14",
+          "0x15",
+          "0x16",
+          "0x17",
+          "0x18",
+          "0x19",
+          "0x1A",
+          "0x1B",
+          "0x1C",
+          "0x1D",
+          "0x1E",
+          "0x1F",
+          "0x20",
+          "0x7F"
+        ],
+        "production": "or"
+      },
+      "ASCIISymbol":
+      {
+        "rules":
+        [
+          "!",
+          "\"",
+          "#",
+          "$",
+          "%",
+          "&",
+          "'",
+          "(",
+          ")",
+          "*",
+          "+",
+          ",",
+          "-",
+          ".",
+          "/",
+          ":",
+          ";",
+          "<",
+          "=",
+          ">",
+          "?",
+          "@",
+          "[",
+          "\\",
+          "]",
+          "^",
+          "_",
+          "`",
+          "{",
+          "|",
+          "}",
+          "~"
+        ],
+        "production": "or"
+      },
+      "ASCIICharacter":
+      {
+        "rules":
+        [
+          "digit",
+          "letter",
+          "ASCIIWhitespace",
+          "ASCIISymbol"
+        ],
+        "production": "or"
+      },
+      "character":
+      {
+        "rules":
+        [
+          "ASCIICharacter"
+        ],
+        "production": "seq"
+      },
+      "string":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              "\"",
+              {
+                "rules":
+                [
+                  "character"
+                ],
+                "production": "any"
+              },
+              "\""
+            ],
+            "production": "seq"
+          },
+          {
+            "rules":
+            [
+              "digit",
+              {
+                "rules":
+                [
+                  "hexDigit"
+                ],
+                "production": "any"
+              },
+              "X"
+            ],
+            "production": "seq"
+          }
+        ],
+        "production": "or"
+      },
+      "ConstDeclaration":
+      {
+        "rules":
+        [
+          "identdef",
+          "=",
+          "ConstExpression"
+        ],
+        "production": "seq"
+      },
+      "ConstExpression":
+      {
+        "rules":
+        [
+          "expression"
+        ],
+        "production": "seq"
+      },
+      "TypeDeclaration":
+      {
+        "rules":
+        [
+          "identdef",
+          "=",
+          "type"
+        ],
+        "production": "seq"
+      },
+      "type":
+      {
+        "rules":
+        [
+          "qualident",
+          "ArrayType",
+          "RecordType",
+          "PointerType",
+          "ProcedureType"
+        ],
+        "production": "or"
+      },
+      "ArrayType":
+      {
+        "rules":
+        [
+          "ARRAY",
+          "length",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ",",
+                  "length"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          },
+          "OF",
+          "type"
+        ],
+        "production": "seq"
+      },
+      "length":
+      {
+        "rules":
+        [
+          "ConstExpression"
+        ],
+        "production": "seq"
+      },
+      "RecordType":
+      {
+        "rules":
+        [
+          "RECORD",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "(",
+                  "BaseType",
+                  ")"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          {
+            "rules":
+            [
+              "FieldListSequence"
+            ],
+            "production": "opt"
+          },
+          "END"
+        ],
+        "production": "seq"
+      },
+      "BaseType":
+      {
+        "rules":
+        [
+          "qualident"
+        ],
+        "production": "seq"
+      },
+      "FieldListSequence":
+      {
+        "rules":
+        [
+          "FieldList",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ";",
+                  "FieldList"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "FieldList":
+      {
+        "rules":
+        [
+          "IdentList",
+          ":",
+          "type"
+        ],
+        "production": "seq"
+      },
+      "IdentList":
+      {
+        "rules":
+        [
+          "identdef",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ",",
+                  "identdef"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "PointerType":
+      {
+        "rules":
+        [
+          "POINTER",
+          "TO",
+          "type"
+        ],
+        "production": "seq"
+      },
+      "ProcedureType":
+      {
+        "rules":
+        [
+          "PROCEDURE",
+          {
+            "rules":
+            [
+              "FormalParameters"
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "VariableDeclaration":
+      {
+        "rules":
+        [
+          "IdentList",
+          ":",
+          "type"
+        ],
+        "production": "seq"
+      },
+      "expression":
+      {
+        "rules":
+        [
+          "SimpleExpression",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "relation",
+                  "SimpleExpression"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "relation":
+      {
+        "rules":
+        [
+          "=",
+          "#",
+          "<",
+          "<=",
+          ">",
+          ">=",
+          "IN",
+          "IS"
+        ],
+        "production": "or"
+      },
+      "SimpleExpression":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "+",
+                  "-"
+                ],
+                "production": "or"
+              }
+            ],
+            "production": "opt"
+          },
+          "term",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "AddOperator",
+                  "term"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "AddOperator":
+      {
+        "rules":
+        [
+          "+",
+          "-",
+          "OR"
+        ],
+        "production": "or"
+      },
+      "term":
+      {
+        "rules":
+        [
+          "factor",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "MulOperator",
+                  "factor"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "MulOperator":
+      {
+        "rules":
+        [
+          "*",
+          "/",
+          "DIV",
+          "MOD",
+          "&"
+        ],
+        "production": "or"
+      },
+      "factor":
+      {
+        "rules":
+        [
+          "number",
+          "string",
+          "NIL",
+          "TRUE",
+          "FALSE",
+          "set",
+          {
+            "rules":
+            [
+              "designator",
+              {
+                "rules":
+                [
+                  "ActualParameters"
+                ],
+                "production": "opt"
+              }
+            ],
+            "production": "seq"
+          },
+          {
+            "rules":
+            [
+              "(",
+              "expression",
+              ")"
+            ],
+            "production": "seq"
+          },
+          {
+            "rules":
+            [
+              "~",
+              "factor"
+            ],
+            "production": "seq"
+          }
+        ],
+        "production": "or"
+      },
+      "designator":
+      {
+        "rules":
+        [
+          "qualident",
+          {
+            "rules":
+            [
+              "selector"
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "selector":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              ".",
+              "ident"
+            ],
+            "production": "seq"
+          },
+          {
+            "rules":
+            [
+              "[",
+              "ExpList",
+              "]"
+            ],
+            "production": "seq"
+          },
+          "^",
+          {
+            "rules":
+            [
+              "(",
+              "qualident",
+              ")"
+            ],
+            "production": "seq"
+          }
+        ],
+        "production": "or"
+      },
+      "set":
+      {
+        "rules":
+        [
+          "{",
+          {
+            "rules":
+            [
+              "element",
+              {
+                "rules":
+                [
+                  {
+                    "rules":
+                    [
+                      ",",
+                      "element"
+                    ],
+                    "production": "seq"
+                  }
+                ],
+                "production": "any"
+              }
+            ],
+            "production": "opt"
+          },
+          "}"
+        ],
+        "production": "seq"
+      },
+      "element":
+      {
+        "rules":
+        [
+          "expression",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "..",
+                  "expression"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "ExpList":
+      {
+        "rules":
+        [
+          "expression",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ",",
+                  "expression"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "ActualParameters":
+      {
+        "rules":
+        [
+          "(",
+          {
+            "rules":
+            [
+              "ExpList"
+            ],
+            "production": "opt"
+          },
+          ")"
+        ],
+        "production": "seq"
+      },
+      "statement":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              "assignment",
+              "ProcedureCall",
+              "IfStatement",
+              "CaseStatement",
+              "WhileStatement",
+              "RepeatStatement",
+              "ForStatement"
+            ],
+            "production": "or"
+          }
+        ],
+        "production": "opt"
+      },
+      "assignment":
+      {
+        "rules":
+        [
+          "designator",
+          ":=",
+          "expression"
+        ],
+        "production": "seq"
+      },
+      "ProcedureCall":
+      {
+        "rules":
+        [
+          "designator",
+          {
+            "rules":
+            [
+              "ActualParameters"
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "StatementSequence":
+      {
+        "rules":
+        [
+          "statement",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ";",
+                  "statement"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "IfStatement":
+      {
+        "rules":
+        [
+          "IF",
+          "expression",
+          "THEN",
+          "StatementSequence",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "ELSIF",
+                  "expression",
+                  "THEN",
+                  "StatementSequence"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          },
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "ELSE",
+                  "StatementSequence"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          "END"
+        ],
+        "production": "seq"
+      },
+      "CaseStatement":
+      {
+        "rules":
+        [
+          "CASE",
+          "expression",
+          "OF",
+          "case",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "|",
+                  "case"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          },
+          "END"
+        ],
+        "production": "seq"
+      },
+      "case":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              "CaseLabelList",
+              ":",
+              "StatementSequence"
+            ],
+            "production": "seq"
+          }
+        ],
+        "production": "opt"
+      },
+      "CaseLabelList":
+      {
+        "rules":
+        [
+          "LabelRange",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ",",
+                  "LabelRange"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "LabelRange":
+      {
+        "rules":
+        [
+          "label",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "..",
+                  "label"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "label":
+      {
+        "rules":
+        [
+          "integer",
+          "string",
+          "qualident"
+        ],
+        "production": "or"
+      },
+      "WhileStatement":
+      {
+        "rules":
+        [
+          "WHILE",
+          "expression",
+          "DO",
+          "StatementSequence",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "ELSIF",
+                  "expression",
+                  "DO",
+                  "StatementSequence"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          },
+          "END"
+        ],
+        "production": "seq"
+      },
+      "RepeatStatement":
+      {
+        "rules":
+        [
+          "REPEAT",
+          "StatementSequence",
+          "UNTIL",
+          "expression"
+        ],
+        "production": "seq"
+      },
+      "ForStatement":
+      {
+        "rules":
+        [
+          "FOR",
+          "ident",
+          ":=",
+          "expression",
+          "TO",
+          "expression",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "BY",
+                  "ConstExpression"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          "DO",
+          "StatementSequence",
+          "END"
+        ],
+        "production": "seq"
+      },
+      "ProcedureDeclaration":
+      {
+        "rules":
+        [
+          "ProcedureHeading",
+          ";",
+          "ProcedureBody",
+          "ident"
+        ],
+        "production": "seq"
+      },
+      "ProcedureHeading":
+      {
+        "rules":
+        [
+          "PROCEDURE",
+          "identdef",
+          {
+            "rules":
+            [
+              "FormalParameters"
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "ProcedureBody":
+      {
+        "rules":
+        [
+          "DeclarationSequence",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "BEGIN",
+                  "StatementSequence"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "RETURN",
+                  "expression"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          "END"
+        ],
+        "production": "seq"
+      },
+      "DeclarationSequence":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "CONST",
+                  {
+                    "rules":
+                    [
+                      {
+                        "rules":
+                        [
+                          "ConstDeclaration",
+                          ";"
+                        ],
+                        "production": "seq"
+                      }
+                    ],
+                    "production": "any"
+                  }
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "TYPE",
+                  {
+                    "rules":
+                    [
+                      {
+                        "rules":
+                        [
+                          "TypeDeclaration",
+                          ";"
+                        ],
+                        "production": "seq"
+                      }
+                    ],
+                    "production": "any"
+                  }
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "VAR",
+                  {
+                    "rules":
+                    [
+                      {
+                        "rules":
+                        [
+                          "VariableDeclaration",
+                          ";"
+                        ],
+                        "production": "seq"
+                      }
+                    ],
+                    "production": "any"
+                  }
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "ProcedureDeclaration",
+                  ";"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          }
+        ],
+        "production": "seq"
+      },
+      "FormalParameters":
+      {
+        "rules":
+        [
+          "(",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "FPSection",
+                  {
+                    "rules":
+                    [
+                      ";",
+                      "FPSection"
+                    ],
+                    "production": "any"
+                  }
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          ")",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ":",
+                  "qualident"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      },
+      "FPSection":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              "VAR"
+            ],
+            "production": "opt"
+          },
+          "ident",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ",",
+                  "ident"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          },
+          ":",
+          "FormalType"
+        ],
+        "production": "seq"
+      },
+      "FormalType":
+      {
+        "rules":
+        [
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "ARRAY",
+                  "OF"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          },
+          "qualident"
+        ],
+        "production": "seq"
+      },
+      "module":
+      {
+        "rules":
+        [
+          "MODULE",
+          "ident",
+          ";",
+          {
+            "rules":
+            [
+              "ImportList"
+            ],
+            "production": "opt"
+          },
+          "DeclarationSequence",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  "BEGIN",
+                  "StatementSequence"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          },
+          "END",
+          "ident",
+          "."
+        ],
+        "production": "seq"
+      },
+      "ImportList":
+      {
+        "rules":
+        [
+          "IMPORT",
+          "import",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ",",
+                  "import"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "any"
+          },
+          ";"
+        ],
+        "production": "seq"
+      },
+      "import":
+      {
+        "rules":
+        [
+          "ident",
+          {
+            "rules":
+            [
+              {
+                "rules":
+                [
+                  ":=",
+                  "ident"
+                ],
+                "production": "seq"
+              }
+            ],
+            "production": "opt"
+          }
+        ],
+        "production": "seq"
+      }
+    }
+  },
+  "builtins":
+  {
+    "regular":
+    {
+      "functions":
+      [
+        {
+          "Name": "ABS",
+          "Argument type": "x: numeric type",
+          "Result type": "type of x",
+          "Function": "absolute value"
+        },
+        {
+          "Name": "ASR",
+          "Argument type": "x, n: INTEGER",
+          "Result type": "INTEGER",
+          "Function": "signed shift right, `x DIV 2`"
+        },
+        {
+          "Name": "CHR",
+          "Argument type": "x: INTEGER",
+          "Result type": "CHAR",
+          "Function": "character with ordinal number `x`"
+        },
+        {
+          "Name": "FLOOR",
+          "Argument type": "x: REAL",
+          "Result type": "INTEGER",
+          "Function": "round down"
+        },
+        {
+          "Name": "FLT",
+          "Argument type": "x: INTEGER",
+          "Result type": "REAL",
+          "Function": "identity"
+        },
+        {
+          "Name": "LEN",
+          "Argument type": "v: array",
+          "Result type": "INTEGER",
+          "Function": "the length of `v`"
+        },
+        {
+          "Name": "LSL",
+          "Argument type": "x, n: INTEGER",
+          "Result type": "INTEGER",
+          "Function": "logical shift left, `x * 2^n`"
+        },
+        {
+          "Name": "ODD",
+          "Argument type": "x: INTEGER",
+          "Result type": "BOOLEAN",
+          "Function": "`x MOD 2 = 1`"
+        },
+        {
+          "Name": "ORD",
+          "Argument type": "x: CHAR, BOOLEAN, SET",
+          "Result type": "INTEGER",
+          "Function": "ordinal number of `x`"
+        },
+        {
+          "Name": "ROR",
+          "Argument type": "x, n: INTEGER",
+          "Result type": "INTEGER",
+          "Function": "`x` rotated right by `n` bits"
+        }
+      ],
+      "procedures":
+      [
+        {
+          "Name": "ASSERT",
+          "Argument type": "b: BOOLEAN",
+          "Function": "abort if `~b`"
+        },
+        {
+          "Name": "DEC",
+          "Argument type": "v: INTEGER\\nv, n: INTEGER",
+          "Function": "`v := v - 1`\\n`v := v - n`"
+        },
+        {
+          "Name": "EXCL",
+          "Argument type": "v: SET; x: INTEGER",
+          "Function": "`v := v - {x}`"
+        },
+        {
+          "Name": "INC",
+          "Argument type": "v: INTEGER\\nv, n: INTEGER",
+          "Function": "`v := v + 1`\\n`v := v + n`"
+        },
+        {
+          "Name": "INCL",
+          "Argument type": "v: SET; x: INTEGER",
+          "Function": "`v := v + {x}`"
+        },
+        {
+          "Name": "NEW",
+          "Argument type": "v: pointer type",
+          "Function": "allocate `v^`"
+        },
+        {
+          "Name": "PACK",
+          "Argument type": "x: REAL; n: INTEGER",
+          "Function": "pack `x` and `n` into `x`"
+        },
+        {
+          "Name": "UNPK",
+          "Argument type": "x: REAL; n: INTEGER",
+          "Function": "unpack `x` into `x` and `n`"
+        }
+      ]
+    },
+    "system":
+    {
+      "functions":
+      [
+        {
+          "Name": "SYSTEM.ADC",
+          "Argument type": "m, n: INTEGER",
+          "Result type": "INTEGER",
+          "Function": "add with carry `C`"
+        },
+        {
+          "Name": "SYSTEM.ADR",
+          "Argument type": "v: any",
+          "Result type": "INTEGER",
+          "Function": "address of variable `v`"
+        },
+        {
+          "Name": "SYSTEM.BIT",
+          "Argument type": "a, n: INTEGER",
+          "Result type": "BOOLEAN",
+          "Function": "bit `n` of `mem[a]`"
+        },
+        {
+          "Name": "SYSTEM.COND",
+          "Argument type": "n: INTEGER",
+          "Result type": "BOOLEAN",
+          "Function": "`IF Cond(n) THEN ...`"
+        },
+        {
+          "Name": "SYSTEM.SBC",
+          "Argument type": "m, n: INTEGER",
+          "Result type": "INTEGER",
+          "Function": "subtract with carry `C`"
+        },
+        {
+          "Name": "SYSTEM.SIZE",
+          "Argument type": "T: any type",
+          "Result type": "INTEGER",
+          "Function": "size in bytes"
+        },
+        {
+          "Name": "SYSTEM.UML",
+          "Argument type": "m, n: INTEGER",
+          "Result type": "INTEGER",
+          "Function": "unsigned multiplication"
+        },
+        {
+          "Name": "SYSTEM.VAL",
+          "Argument type": "T, n: scalar",
+          "Result type": "T",
+          "Function": "identity"
+        }
+      ],
+      "procedures":
+      [
+        {
+          "Name": "SYSTEM.COPY",
+          "Argument type": "src, dst, n: INTEGER",
+          "Function": "copy `n` consecutive words from `src` to `dst`"
+        },
+        {
+          "Name": "SYSTEM.GET",
+          "Argument type": "a: INTEGER; v: any basic type",
+          "Function": "`v := mem[a]`"
+        },
+        {
+          "Name": "SYSTEM.LED",
+          "Argument type": "n: INTEGER",
+          "Function": "display `n` on LEDs"
+        },
+        {
+          "Name": "SYSTEM.PUT",
+          "Argument type": "a: INTEGER; x: any basic type",
+          "Function": "`mem[a] := x`"
+        }
+      ]
+    }
+  }
+}
