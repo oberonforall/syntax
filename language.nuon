@@ -1,28 +1,28 @@
 {
     syntax: {
         rules: {
-            "letter": {  # "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+            letter: {  # "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
                 rules: [
                     "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
                 ],
                 production: "or"
             },
 
-            "digit": {  # "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+            digit: {  # "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
                 rules: [
                     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
                 ],
                 production: "or"
             },
 
-            "hexDigit": {  # digit | "A" | "B" | "C" | "D" | "E" | "F"
+            hexDigit: {  # digit | "A" | "B" | "C" | "D" | "E" | "F"
                 rules: [
                     "digit", "A", "B", "C", "D", "E", "F"
                 ],
                 production: "or"
             },
 
-            "ident": {  # letter {letter | digit}
+            ident: {  # letter {letter | digit}
                 rules: [
                     "letter",
                     {
@@ -38,7 +38,7 @@
                 production: "seq"
             },
 
-            "qualident": {  # [ident "."] ident
+            qualident: {  # [ident "."] ident
                 rules: [
                     {
                         rules: [
@@ -53,7 +53,7 @@
                 ],
                 production: "seq"
             }
-            "identdef": {  # ident ["*"]
+            identdef: {  # ident ["*"]
                 rules: [
                     "ident",
                     {
@@ -64,7 +64,7 @@
                 production: "seq"
             },
 
-            "integer": {  # digit {digit} | digit {hexDigit} "H"
+            integer: {  # digit {digit} | digit {hexDigit} "H"
                 rules: [
                     {
                         rules: [
@@ -91,7 +91,7 @@
                 production: "or"
             },
 
-            "real": {  # digit {digit} "." {digit} [ScaleFactor]
+            real: {  # digit {digit} "." {digit} [ScaleFactor]
                 rules: [
                     "digit",
                     {
@@ -111,7 +111,7 @@
                 production: "seq"
             },
 
-            "ScaleFactor": {  # "E" ["+" | "-"] digit {digit}
+            ScaleFactor: {  # "E" ["+" | "-"] digit {digit}
                 rules: [
                     "E",
                     {
@@ -132,32 +132,32 @@
                 production: "seq"
             },
 
-            "number": {  # integer | real
+            number: {  # integer | real
                 rules: ["integer", "real"],
                 production: "or"
             },
 
-            "ASCIIWhitespace": {
+            ASCIIWhitespace: {
                 rules: ["0x00", "0x01", "0x02", "0x03", "0x04", "0x05", "0x06", "0x07", "0x08", "0x09", "0x0A", "0x0B", "0x0C", "0x0D", "0x0E", "0x0F", "0x10", "0x11", "0x12", "0x13", "0x14", "0x15", "0x16", "0x17", "0x18", "0x19", "0x1A", "0x1B", "0x1C", "0x1D", "0x1E", "0x1F", "0x20", "0x7F"],
                 production: "or"
             },
 
-            "ASCIISymbol": {
+            ASCIISymbol: {
                 rules: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
                 production: "or"
             },
 
-            "ASCIICharacter": {
+            ASCIICharacter: {
                 rules: ["digit", "letter", "ASCIIWhitespace", "ASCIISymbol"],
                 production: "or"
             },
 
-            "character": {
+            character: {
                 rules: ["ASCIICharacter"],
                 production: "seq"
             },
 
-            "string": {  # """ {character} """ | digit {hexDigit} "X"
+            string: {  # """ {character} """ | digit {hexDigit} "X"
                 rules: [
                     {
                         rules: [
@@ -185,27 +185,27 @@
                 production: "or"
             },
 
-            "ConstDeclaration": {  # identdef "=" ConstExpression
+            ConstDeclaration: {  # identdef "=" ConstExpression
                 rules: ["identdef", "=", "ConstExpression"],
                 production: "seq"
             },
 
-            "ConstExpression": {  # expression
+            ConstExpression: {  # expression
                 rules: ["expression"],
                 production: "seq"
             },
 
-            "TypeDeclaration": {  # identdef "=" type
+            TypeDeclaration: {  # identdef "=" type
                 rules: ["identdef", "=", "type"],
                 production: "seq"
             },
 
-            "type": {  # qualident | ArrayType | RecordType | PointerType | ProcedureType
+            type: {  # qualident | ArrayType | RecordType | PointerType | ProcedureType
                 rules: ["qualident", "ArrayType", "RecordType", "PointerType", "ProcedureType"],
                 production: "or"
             },
 
-            "ArrayType": {  # ARRAY length {"," length} OF type
+            ArrayType: {  # ARRAY length {"," length} OF type
                 rules: [
                     "ARRAY",
                     "length",
@@ -224,12 +224,12 @@
                 production: "seq"
             },
 
-            "length": {  # ConstExpression
+            length: {  # ConstExpression
                 rules: ["ConstExpression"],
                 production: "seq"
             },
 
-            "RecordType": {  # RECORD ["(" BaseType ")"] [FieldListSequence] END
+            RecordType: {  # RECORD ["(" BaseType ")"] [FieldListSequence] END
                 rules: [
                     "RECORD",
                     {
@@ -250,12 +250,12 @@
                 production: "seq"
             },
 
-            "BaseType": {  # qualident
+            BaseType: {  # qualident
                 rules: ["qualident"],
                 production: "seq"
             },
 
-            "FieldListSequence": {  # FieldList {";" FieldList}
+            FieldListSequence: {  # FieldList {";" FieldList}
                 rules: [
                     "FieldList",
                     {
@@ -271,12 +271,12 @@
                 production: "seq"
             },
 
-            "FieldList": {  # IdentList ":" type
+            FieldList: {  # IdentList ":" type
                 rules: ["IdentList", ":", "type"],
                 production: "seq"
             },
 
-            "IdentList": {  # identdef {"," identdef}
+            IdentList: {  # identdef {"," identdef}
                 rules: [
                     "identdef",
                     {
@@ -292,12 +292,12 @@
                 production: "seq"
             },
 
-            "PointerType": {  # POINTER TO type
+            PointerType: {  # POINTER TO type
                 rules: ["POINTER", "TO", "type"],
                 production: "seq"
             },
 
-            "ProcedureType": {  # PROCEDURE [FormalParameters]
+            ProcedureType: {  # PROCEDURE [FormalParameters]
                 rules: [
                     "PROCEDURE",
                     {
@@ -308,12 +308,12 @@
                 production: "seq"
             },
 
-            "VariableDeclaration": {  # IdentList ":" type
+            VariableDeclaration: {  # IdentList ":" type
                 rules: ["IdentList", ":", "type"],
                 production: "seq"
             },
 
-            "expression": {  # SimpleExpression [relation SimpleExpression]
+            expression: {  # SimpleExpression [relation SimpleExpression]
                 rules: [
                     "SimpleExpression",
                     {
@@ -329,12 +329,12 @@
                 production: "seq"
             },
 
-            "relation": {  # "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS
+            relation: {  # "=" | "#" | "<" | "<=" | ">" | ">=" | IN | IS
                 rules: ["=", "#", "<", "<=", ">", ">=", "IN", "IS"],
                 production: "or"
             },
 
-            "SimpleExpression": {  # ["+" | "-"] term {AddOperator term}
+            SimpleExpression: {  # ["+" | "-"] term {AddOperator term}
                 rules: [
                     {
                         rules: [
@@ -359,12 +359,12 @@
                 production: "seq"
             },
 
-            "AddOperator": {  # "+" | "-" | OR
+            AddOperator: {  # "+" | "-" | OR
                 rules: ["+", "-", "OR"],
                 production: "or"
             },
 
-            "term": {  # factor {MulOperator factor}
+            term: {  # factor {MulOperator factor}
                 rules: [
                     "factor",
                     {
@@ -380,12 +380,12 @@
                 production: "seq"
             },
 
-            "MulOperator": {  # "*" | "/" | DIV | MOD | "&"
+            MulOperator: {  # "*" | "/" | DIV | MOD | "&"
                 rules: ["*", "/", "DIV", "MOD", "&"],
                 production: "or"
             },
 
-            "factor": {  # number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor
+            factor: {  # number | string | NIL | TRUE | FALSE | set | designator [ActualParameters] | "(" expression ")" | "~" factor
                 rules: [
                     "number",
                     "string",
@@ -415,7 +415,7 @@
                 production: "or"
             },
 
-            "designator": {  # qualident {selector}
+            designator: {  # qualident {selector}
                 rules: [
                     "qualident",
                     {
@@ -426,7 +426,7 @@
                 production: "seq"
             },
 
-            "selector": {  # "." ident | "[" ExpList "]" | "^" | "(" qualident ")"
+            selector: {  # "." ident | "[" ExpList "]" | "^" | "(" qualident ")"
                 rules: [
                     {
                         rules: [".", "ident"],
@@ -445,7 +445,7 @@
                 production: "or"
             },
 
-            "set": {  # "{" [element {"," element}] "}"
+            set: {  # "{" [element {"," element}] "}"
                 rules: [
                     "{",
                     {
@@ -468,7 +468,7 @@
                 production: "seq"
             },
 
-            "element": {  # expression [".." expression]
+            element: {  # expression [".." expression]
                 rules: [
                     "expression",
                     {
@@ -484,7 +484,7 @@
                 production: "seq"
             },
 
-            "ExpList": {  # expression {"," expression}
+            ExpList: {  # expression {"," expression}
                 rules: [
                     "expression",
                     {
@@ -500,7 +500,7 @@
                 production: "seq"
             },
 
-            "ActualParameters": {  # "(" [ExpList] ")"
+            ActualParameters: {  # "(" [ExpList] ")"
                 rules: [
                     "(",
                     {
@@ -512,7 +512,7 @@
                 production: "seq"
             },
 
-            "statement": {  # [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement]
+            statement: {  # [assignment | ProcedureCall | IfStatement | CaseStatement | WhileStatement | RepeatStatement | ForStatement]
                 rules: [
                     {
                         rules: [
@@ -530,12 +530,12 @@
                 production: "opt"
             },
 
-            "assignment": {  # designator ":=" expression
+            assignment: {  # designator ":=" expression
                 rules: ["designator", ":=", "expression"],
                 production: "seq"
             },
 
-            "ProcedureCall": {  # designator [ActualParameters]
+            ProcedureCall: {  # designator [ActualParameters]
                 rules: [
                     "designator",
                     {
@@ -546,7 +546,7 @@
                 production: "seq"
             },
 
-            "StatementSequence": {  # statement {";" statement}
+            StatementSequence: {  # statement {";" statement}
                 rules: [
                     "statement",
                     {
@@ -562,7 +562,7 @@
                 production: "seq"
             },
 
-            "IfStatement": {  # IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END
+            IfStatement: {  # IF expression THEN StatementSequence {ELSIF expression THEN StatementSequence} [ELSE StatementSequence] END
                 rules: [
                     "IF",
                     "expression",
@@ -591,7 +591,7 @@
                 production: "seq"
             },
 
-            "CaseStatement": {  # CASE expression OF case {"|" case} END
+            CaseStatement: {  # CASE expression OF case {"|" case} END
                 rules: [
                     "CASE",
                     "expression",
@@ -611,7 +611,7 @@
                 production: "seq"
             },
 
-            "case": {  # [CaseLabelList ":" StatementSequence]
+            case: {  # [CaseLabelList ":" StatementSequence]
                 rules: [
                     {
                         rules: ["CaseLabelList", ":", "StatementSequence"],
@@ -621,7 +621,7 @@
                 production: "opt"
             },
 
-            "CaseLabelList": {  # LabelRange {"," LabelRange}
+            CaseLabelList: {  # LabelRange {"," LabelRange}
                 rules: [
                     "LabelRange",
                     {
@@ -637,7 +637,7 @@
                 production: "seq"
             },
 
-            "LabelRange": {  # label [".." label]
+            LabelRange: {  # label [".." label]
                 rules: [
                     "label",
                     {
@@ -653,12 +653,12 @@
                 production: "seq"
             },
 
-            "label": {  # integer | string | qualident
+            label: {  # integer | string | qualident
                 rules: ["integer", "string", "qualident"],
                 production: "or"
             },
 
-            "WhileStatement": {  # WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END
+            WhileStatement: {  # WHILE expression DO StatementSequence {ELSIF expression DO StatementSequence} END
                 rules: [
                     "WHILE",
                     "expression",
@@ -678,12 +678,12 @@
                 production: "seq"
             },
 
-            "RepeatStatement": {  # REPEAT StatementSequence UNTIL expression
+            RepeatStatement: {  # REPEAT StatementSequence UNTIL expression
                 rules: ["REPEAT", "StatementSequence", "UNTIL", "expression"],
                 production: "seq"
             },
 
-            "ForStatement": {  # FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END
+            ForStatement: {  # FOR ident ":=" expression TO expression [BY ConstExpression] DO StatementSequence END
                 rules: [
                     "FOR",
                     "ident",
@@ -707,12 +707,12 @@
                 production: "seq"
             },
 
-            "ProcedureDeclaration": {  # ProcedureHeading ";" ProcedureBody ident
+            ProcedureDeclaration: {  # ProcedureHeading ";" ProcedureBody ident
                 rules: ["ProcedureHeading", ";", "ProcedureBody", "ident"],
                 production: "seq"
             },
 
-            "ProcedureHeading": {  # PROCEDURE identdef [FormalParameters]
+            ProcedureHeading: {  # PROCEDURE identdef [FormalParameters]
                 rules: [
                     "PROCEDURE",
                     "identdef",
@@ -724,7 +724,7 @@
                 production: "seq"
             },
 
-            "ProcedureBody": {  # DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END
+            ProcedureBody: {  # DeclarationSequence [BEGIN StatementSequence] [RETURN expression] END
                 rules: [
                     "DeclarationSequence",
                     {
@@ -750,7 +750,7 @@
                 production: "seq"
             },
 
-            "DeclarationSequence": {  # [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"}
+            DeclarationSequence: {  # [CONST {ConstDeclaration ";"}] [TYPE {TypeDeclaration ";"}] [VAR {VariableDeclaration ";"}] {ProcedureDeclaration ";"}
                 rules: [
                     {
                         rules: [
@@ -825,7 +825,7 @@
                 production: "seq"
             },
 
-            "FormalParameters": {  # "(" [FPSection {";" FPSection}] ")" [":" qualident]
+            FormalParameters: {  # "(" [FPSection {";" FPSection}] ")" [":" qualident]
                 rules: [
                     "(",
                     {
@@ -857,7 +857,7 @@
                 production: "seq"
             },
 
-            "FPSection": {  # [VAR] ident {"," ident} ":" FormalType
+            FPSection: {  # [VAR] ident {"," ident} ":" FormalType
                 rules: [
                     {
                         rules: ["VAR"],
@@ -879,7 +879,7 @@
                 production: "seq"
             },
 
-            "FormalType": {  # {ARRAY OF} qualident
+            FormalType: {  # {ARRAY OF} qualident
                 rules: [
                     {
                         rules: [
@@ -895,7 +895,7 @@
                 production: "seq"
             },
 
-            "module": {  # MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident "."
+            module: {  # MODULE ident ";" [ImportList] DeclarationSequence [BEGIN StatementSequence] END ident "."
                 rules: [
                     "MODULE",
                     "ident",
@@ -921,7 +921,7 @@
                 production: "seq"
             },
 
-            "ImportList": {  # IMPORT import {"," import} ";"
+            ImportList: {  # IMPORT import {"," import} ";"
                 rules: [
                     "IMPORT",
                     "import",
@@ -939,7 +939,7 @@
                 production: "seq"
             },
 
-            "import": {  # ident [":=" ident]
+            import: {  # ident [":=" ident]
                 rules: [
                     "ident",
                     {
