@@ -13,6 +13,16 @@ e.g.
 ```
 to dump the language file to the assumed default location in the project.
 
+### Generate the eBNF of `oberon`
+```bash
+> ./scripts/generate-ebnf --help
+```
+e.g.
+```bash
+> ./scripts/generate-ebnf --path language.json --all
+```
+to generate all the plain text eBNF production rules of the syntax of the language.
+
 ### Generate the static website pages
 ```bash
 > ./script/generate-website
