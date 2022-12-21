@@ -1038,12 +1038,13 @@ let language = {
 #     }
 # }
 def main [
-    file: string = ""  # a location to store the result to
+    file: string = "language.json"  # the location to store the result to
+    --output (-o): bool  #
 ] {
-    if not ($file | is-empty) {
+    if not ($output) {
         print $"Storing the syntax inside '($file)'"
         $language | save $file
     } else {
-        $language | to json
+        $language
     }
 }
