@@ -1016,7 +1016,35 @@ let language = {
             "procedures": $system_procedures
         }
     }
-
 }
 
-$language | to json
+
+# generate the full syntax of the oberon language
+#
+# the structure of the result is the following
+# {
+#     syntax: {
+#         rules: <rules>
+#     }
+#     builtins : {
+#         regular: {
+#             functions: <regular_functions>
+#             procedures: <regular_procedures>
+#         }
+#         system: {
+#             functions: <system_functions>
+#             procedures: <system_procedures>
+#         }
+#     }
+# }
+def main [
+    file: string = "language.json"  # the location to store the result to
+    --output (-o): bool  #
+] {
+    if not ($output) {
+        print $"Storing the syntax inside '($file)'"
+        $language | save $file
+    } else {
+        $language
+    }
+}
