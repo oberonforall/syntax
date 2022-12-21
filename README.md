@@ -9,7 +9,7 @@ A collection of resources and scripts to work on and play with the minimal synta
 ```
 e.g.
 ```bash
-> ./scripts/generate-language language.json
+> ./scripts/generate-language
 ```
 to dump the language file to the assumed default location in the project.
 
